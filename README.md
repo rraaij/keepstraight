@@ -1,4 +1,1 @@
 keepstraight
-ionic2
-typescript
-redux
