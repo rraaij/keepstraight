@@ -14,14 +14,15 @@ log.txt
 .sass-cache/
 .versions/
 platforms/
+/www/*
 coverage/
 dist/
 node_modules/
 tmp/
 temp/
-www/build/
 $RECYCLE.BIN/
 
 .DS_Store
 Thumbs.db
 UserInterfaceState.xcuserstate
+yarn.lock
