@@ -1,29 +1,23 @@
 import { NgModule, ErrorHandler } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
-import { MyApp } from './app.component';
-import { AboutPage } from '../pages/about/about';
-import { ContactPage } from '../pages/contact/contact';
-import { HomePage } from '../pages/home/home';
-import { TabsPage } from '../pages/tabs/tabs';
+import { KeepstraightApp } from './app.component';
+import { SetupPage } from '../pages/setup/setup';
+import { GamePage } from '../pages/game/game';
 
 @NgModule({
     declarations: [
-        MyApp,
-        AboutPage,
-        ContactPage,
-        HomePage,
-        TabsPage
+      KeepstraightApp,
+      SetupPage,
+      GamePage
     ],
     imports: [
-        IonicModule.forRoot(MyApp)
+      IonicModule.forRoot(KeepstraightApp)
     ],
     bootstrap: [IonicApp],
     entryComponents: [
-        MyApp,
-        AboutPage,
-        ContactPage,
-        HomePage,
-        TabsPage
+      KeepstraightApp,
+      SetupPage,
+      GamePage
     ],
     providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}]
 })
