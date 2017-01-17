@@ -1,8 +1,13 @@
 import { NgModule, ErrorHandler } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
+import { StoreModule} from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { KeepstraightApp } from './app.component';
 import { SetupPage } from '../pages/setup/setup';
 import { GamePage } from '../pages/game/game';
+import reducer from './reducers';
+import actions from './actions';
+import service from './services';
 
 @NgModule({
     declarations: [
@@ -11,7 +16,9 @@ import { GamePage } from '../pages/game/game';
       GamePage
     ],
     imports: [
-      IonicModule.forRoot(KeepstraightApp)
+      IonicModule.forRoot(KeepstraightApp),
+      StoreModule.provideStore({ reducer }),
+      StoreDevtoolsModule.instrumentOnlyWithExtension()
     ],
     bootstrap: [IonicApp],
     entryComponents: [
@@ -19,6 +26,10 @@ import { GamePage } from '../pages/game/game';
       SetupPage,
       GamePage
     ],
-    providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}]
+    providers: [
+      {provide: ErrorHandler, useClass: IonicErrorHandler},
+      actions,
+      service
+    ]
 })
 export class AppModule {}

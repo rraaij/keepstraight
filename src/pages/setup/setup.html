@@ -1,6 +1,8 @@
-<ion-navbar *navbar>
-  <ion-title>Setup</ion-title>
-</ion-navbar>
+<ion-header>
+  <ion-navbar>
+    <ion-title>Setup</ion-title>
+  </ion-navbar>
+</ion-header>
 
 <ion-content>
   <ion-list>
@@ -15,18 +17,20 @@
     </ion-item>
 
     <ion-item>
-      <button large item-left><ion-icon name="ios-remove-outline"></ion-icon></button>
+      <button ion-button large item-left><ion-icon name="ios-remove-outline"></ion-icon></button>
       <ion-input large type="number" [(ngModel)]="setupInfo.targetscore"></ion-input>
-      <button large item-right><ion-icon name="ios-add-outline"></ion-icon></button>
+      <button ion-button large item-right><ion-icon name="ios-add-outline"></ion-icon></button>
     </ion-item>
 
     <ion-item>
-      <button outline item-left><ion-icon name="checkmark-circle"></ion-icon>Player 1 starts</button>
-      <button outline item-right><ion-icon name="checkmark-circle"></ion-icon>Player 2 starts</button>
+      <button ion-button outline item-left><ion-icon name="checkmark-circle"></ion-icon>Player 1 starts</button>
+      <button ion-button outline item-right><ion-icon name="checkmark-circle"></ion-icon>Player 2 starts</button>
     </ion-item>
   </ion-list>
 </ion-content>
 
-<ion-toolbar position="bottom">
-  <button full (click)="startNewGame(setupInfo)">GAME</button>
-</ion-toolbar>
+<ion-footer>
+  <ion-toolbar>
+    <button ion-button full (click)="startNewGame(setupInfo)">GAME</button>
+  </ion-toolbar>
+</ion-footer>
