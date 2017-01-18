@@ -4,7 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import { NavController} from 'ionic-angular';
 
 import { GamePage } from '../game/game';
-import { Setup } from '../../app/models/setup';
+import { Setup } from '../../app/models/setup-model';
 import { AppState } from '../../app/reducers';
 import { SetupActions } from '../../app/actions';
 

@@ -3,7 +3,7 @@ import { compose } from '@ngrx/core/compose';
 // import { storeLogger } from 'ngrx-store-logger';
 import { combineReducers } from '@ngrx/store';
 
-import setupReducer, * as fromSetup from './setup';
+import setupReducer, * as fromSetup from './setup-reducer';
 //import gameReducer, * as fromGame from './game-reducer';
 
 // e.g. 'setup' is used as a reducer in ../pages/setup/setup.ts using store.select('setup')

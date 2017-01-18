@@ -1,4 +1,4 @@
-import { SetupActions } from './setup';
+import { SetupActions } from './setup-actions';
 
 export {
   SetupActions

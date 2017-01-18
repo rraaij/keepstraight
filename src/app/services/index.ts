@@ -1,4 +1,4 @@
-import { SetupService } from './setup';
+import { SetupService } from './setup-service';
 
 export {
   SetupService
