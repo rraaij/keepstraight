@@ -30,6 +30,25 @@ export class KeepstraightService {
     )
   }
 
+  getGamedataChanges(): Observable<any> {
+    return Observable.create(observer => {
+
+      if (this.db) {
+        // listen for changes on the database
+        this.db.changes(
+          {
+            live: true,
+            since: 'now',
+            include_docs: true
+          }
+        )
+          .on('change', change => {
+            observer.next(change.doc);
+          });
+      }
+    });
+  }
+
   saveSetup(gamesetup: GameSetup) : Promise<any> {
     return this.db.post(gamesetup);
   }

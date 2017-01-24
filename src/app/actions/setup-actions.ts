@@ -28,4 +28,12 @@ export class SetupActions {
       payload: gameSetup
     }
   }
+
+  static GAMEDATA_CHANGE_SUCCESS = '[GAME] data change success';
+  gamedataChangeSuccess(change: any): Action {
+    return {
+      type: SetupActions.GAMEDATA_CHANGE_SUCCESS,
+      payload: change
+    }
+  }
 }

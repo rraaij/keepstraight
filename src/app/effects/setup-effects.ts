@@ -26,4 +26,9 @@ export class SetupEffects {
       console.log('[Effect$] setup:', setup$);
       return this.setupActions.loadSetupSuccess(setup$)
     });
+
+  @Effect() getChanges$ = this.db.getGamedataChanges()
+    .map(change => {
+      return this.setupActions.gamedataChangeSuccess(change);
+    })
 }

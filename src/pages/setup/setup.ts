@@ -34,6 +34,6 @@ export class SetupPage {
       playerOneStarts: true
     }
     this.store.dispatch(this.setupActions.newGame(setup));
-    this.nav.push(GamePage);
+    this.nav.push(GamePage, { setup: setup });
   }
 }

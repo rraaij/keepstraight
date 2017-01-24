@@ -20,6 +20,9 @@ export default function (state = initialState, action: Action): GameState {
     case SetupActions.LOAD_SETUP_SUCCESS: {
       return action.payload;
     }
+    case SetupActions.GAMEDATA_CHANGE_SUCCESS: {
+
+    }
     default: {
       return state;
     }
