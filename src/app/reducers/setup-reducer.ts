@@ -1,23 +1,23 @@
 import { Action } from '@ngrx/store';
 
-import { Setup } from '../models';
+import { GameSetup } from '../models';
 import { SetupActions } from '../actions';
 
-export type SetupState = Setup;
+export type GameState = GameSetup;
 
-const initialState: SetupState = {
+const initialState: GameState = {
   playerOne: 'PLAYER_ONE',
   playerTwo: 'PLAYER_TWO',
   targetscore: 100,
   playerOneStarts: true
 };
 
-export default function (state = initialState, action: Action): SetupState {
+export default function (state = initialState, action: Action): GameState {
   switch (action.type) {
-    case SetupActions.GET_INFO: {
+    case SetupActions.NEW_GAME: {
       return action.payload;
     }
-    case SetupActions.NEW_GAME: {
+    case SetupActions.LOAD_SETUP_SUCCESS: {
       return action.payload;
     }
     default: {

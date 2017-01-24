@@ -1,20 +1,31 @@
 import { Injectable } from '@angular/core';
 import { Action } from '@ngrx/store';
 
+import { GameSetup } from '../models/game-setup';
+
 @Injectable()
 export class SetupActions {
-  static GET_INFO = '[SETUP] Get Info';
-  getInfo(): Action {
+  static NEW_GAME = '[SETUP] New Game';
+  newGame(gameSetup: GameSetup): Action {
     return {
-      type: SetupActions.GET_INFO
+      type: SetupActions.NEW_GAME,
+      payload: gameSetup
     };
   }
 
-  static NEW_GAME = '[SETUP] New Game';
-  newGame(gameInfo): Action {
+  static SAVE_SETUP_SUCCESS = '[SETUP] Save setup success';
+  saveSetupSuccess(gameSetup: GameSetup): Action {
     return {
-      type: SetupActions.NEW_GAME,
-      payload: gameInfo
-    };
+      type: SetupActions.SAVE_SETUP_SUCCESS,
+      payload: gameSetup
+    }
+  }
+
+  static LOAD_SETUP_SUCCESS = '[SETUP] Load setup success';
+  loadSetupSuccess(gameSetup: GameSetup): Action {
+    return {
+      type: SetupActions.LOAD_SETUP_SUCCESS,
+      payload: gameSetup
+    }
   }
 }

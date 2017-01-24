@@ -10,7 +10,7 @@ import setupReducer, * as fromSetup from './setup-reducer';
 // to connect the setup in the store to the component
 
 export interface AppState {
-  setup: fromSetup.SetupState;
+  setup: fromSetup.GameState;
   //game: fromGame.gameState;
 };
 

@@ -1,9 +1,9 @@
-import { SetupService } from './setup-service';
+import { KeepstraightService } from './keepstraight-service';
 
 export {
-  SetupService
+  KeepstraightService
 };
 
 export default [
-  SetupService
+  KeepstraightService
 ]

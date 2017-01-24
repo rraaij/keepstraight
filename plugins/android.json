@@ -1,0 +1,15 @@
+{
+    "prepare_queue": {
+        "installed": [],
+        "uninstalled": []
+    },
+    "config_munge": {
+        "files": {}
+    },
+    "installed_plugins": {
+        "cordova-plugin-sqlite-2": {
+            "PACKAGE_NAME": "com.ionicframework.keepstraight571014"
+        }
+    },
+    "dependent_plugins": {}
+}
