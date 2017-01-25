@@ -3,6 +3,6 @@
 </ion-navbar>
 
 <ion-content>
-  {{ setupInfo.playerOne }}
+  {{ setupInfo.playerOne | async }}
   <button ion-button (click)="gotoSetup()">Setup</button>
 </ion-content>

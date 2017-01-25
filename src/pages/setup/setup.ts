@@ -21,8 +21,8 @@ export class SetupPage {
     private store: Store<AppState>,
     private setupActions: SetupActions
   ) {
-    // 'setup' here connects to 'setup' in the AppState
-    this.setup = this.store.select(state => state.setup);
+    // 'game' here connects to 'game' in the AppState
+    this.setup = this.store.select(state => state.game);
   }
 
   startNewGame(setupInfo) {

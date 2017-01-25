@@ -10,7 +10,7 @@ import { Observable } from 'rxjs/rx';
   templateUrl: 'game.html'
 })
 export class GamePage {
-  public setupInfo: Observable<GameSetup>;
+  public game: Observable<GameSetup>;
 
   constructor(
     public nav: NavController,
@@ -18,7 +18,7 @@ export class GamePage {
     private store: Store<AppState>
   ) {
     // this.setupInfo = params.get('setup');
-    this.setupInfo = this.store.select(state => state.setup);
+    this.game = this.store.select(state => state.game);
   }
 
   gotoSetup() {
