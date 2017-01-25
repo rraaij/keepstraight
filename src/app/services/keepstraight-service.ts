@@ -25,7 +25,17 @@ export class KeepstraightService {
           return this.db.allDocs({ include_docs: true });
         })
         .then(docs => {
-          return docs;
+          if (docs.rows && docs.rows.length > 0) {
+            return docs.rows[docs.rows.length-1].doc;
+          }
+          return {
+            _id: '1',
+            _rev: 'x',
+            playerOne: 'PLAYER_ONE',
+            playerTwo: 'PLAYER_TWO',
+            targetscore: 100,
+            playerOneStarts: true
+          };
         })
     )
   }

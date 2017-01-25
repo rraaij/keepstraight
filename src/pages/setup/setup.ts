@@ -1,11 +1,11 @@
-import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
+import {Component, ChangeDetectionStrategy} from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs/rx';
 import { NavController} from 'ionic-angular';
 
 import { GamePage } from '../game/game';
 import { GameSetup } from '../../app/models/game-setup';
-import { AppState } from '../../app/reducers';
+import { AppState } from '../../app/services/app-state';
 import { SetupActions } from '../../app/actions';
 
 @Component({
@@ -14,16 +14,15 @@ import { SetupActions } from '../../app/actions';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SetupPage {
-  @Input() setupInfo: Observable<GameSetup>;
+  public setup: Observable<GameSetup>;
 
   constructor(
     public nav: NavController,
     private store: Store<AppState>,
     private setupActions: SetupActions
   ) {
-    // 'setup' here connects to ../app/reducers/index.ts where 'setup'
-    // is defined as a reduce so that it can be used in this component.
-    this.setupInfo = store.select(state => state.setup);
+    // 'setup' here connects to 'setup' in the AppState
+    this.setup = this.store.select(state => state.setup);
   }
 
   startNewGame(setupInfo) {

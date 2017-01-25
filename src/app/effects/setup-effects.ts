@@ -22,9 +22,9 @@ export class SetupEffects {
     });
 
   @Effect() getSetup$ = this.db.getSetup()
-    .map(setup$ => {
-      console.log('[Effect$] setup:', setup$);
-      return this.setupActions.loadSetupSuccess(setup$)
+    .map(setupData$ => {
+      console.log('[Effect$] setup:', setupData$);
+      return this.setupActions.loadSetupSuccess(setupData$)
     });
 
   @Effect() getChanges$ = this.db.getGamedataChanges()

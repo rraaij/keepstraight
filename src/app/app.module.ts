@@ -6,7 +6,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { KeepstraightApp } from './app.component';
 import { SetupPage } from '../pages/setup/setup';
 import { GamePage } from '../pages/game/game';
-import reducer from './reducers';
+import { SetupReducer } from './reducers/setup-reducer';
 import actions from './actions';
 import KeepstraightService from './services';
 import { SetupEffects } from './effects/setup-effects';
@@ -19,7 +19,7 @@ import { SetupEffects } from './effects/setup-effects';
     ],
     imports: [
       IonicModule.forRoot(KeepstraightApp),
-      StoreModule.provideStore({ reducer }),
+      StoreModule.provideStore({ setup: SetupReducer }),
       StoreDevtoolsModule.instrumentOnlyWithExtension(),
       EffectsModule.run(SetupEffects)
     ],

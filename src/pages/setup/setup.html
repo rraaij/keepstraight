@@ -8,17 +8,17 @@
   <ion-list>
     <ion-item>
       <ion-label stacked>Player 1</ion-label>
-      <ion-input type="text" placeholder="Shane van Boening" [(ngModel)]="setupInfo.playerOne"></ion-input>
+      <ion-input type="text" placeholder="Shane van Boening" [(ngModel)]="setup.playerOne"></ion-input>
     </ion-item>
 
     <ion-item>
       <ion-label stacked>Player 2</ion-label>
-      <ion-input type="text" placeholder="Earl Strickland" [(ngModel)]="setupInfo.playerTwo"></ion-input>
+      <ion-input type="text" placeholder="Earl Strickland" [(ngModel)]="setup.playerTwo"></ion-input>
     </ion-item>
 
     <ion-item>
       <button ion-button large item-left><ion-icon name="ios-remove-outline"></ion-icon></button>
-      <ion-input large type="number" [(ngModel)]="setupInfo.targetscore"></ion-input>
+      <ion-input large type="number" placeholder="0" [(ngModel)]="setup.targetscore"></ion-input>
       <button ion-button large item-right><ion-icon name="ios-add-outline"></ion-icon></button>
     </ion-item>
 
@@ -27,10 +27,12 @@
       <button ion-button outline item-right><ion-icon name="checkmark-circle"></ion-icon>Player 2 starts</button>
     </ion-item>
   </ion-list>
+
+  WHATWHAT!?!? {{ setup | async | json }}
 </ion-content>
 
 <ion-footer>
   <ion-toolbar>
-    <button ion-button full (click)="startNewGame(setupInfo)">GAME</button>
+    <button ion-button full (click)="startNewGame(setup)">GAME</button>
   </ion-toolbar>
 </ion-footer>

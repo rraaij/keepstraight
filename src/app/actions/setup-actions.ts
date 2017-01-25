@@ -22,10 +22,10 @@ export class SetupActions {
   }
 
   static LOAD_SETUP_SUCCESS = '[SETUP] Load setup success';
-  loadSetupSuccess(gameSetup: GameSetup): Action {
+  loadSetupSuccess(gameData: any): Action {
     return {
       type: SetupActions.LOAD_SETUP_SUCCESS,
-      payload: gameSetup
+      payload: gameData
     }
   }
 
