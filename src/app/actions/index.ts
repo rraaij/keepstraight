@@ -1,9 +1,10 @@
 import { SetupActions } from './setup-actions';
+import { GameActions } from './game-actions';
 
-export {
-  SetupActions
-};
+export { SetupActions };
+export { GameActions };
 
 export default [
-  SetupActions
+  SetupActions,
+  GameActions
 ];

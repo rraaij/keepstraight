@@ -11,7 +11,7 @@ const initialState: GameSetup = {
   playerTurn: 1
 };
 
-export const GameReducer: ActionReducer<GameSetup> =  (state: GameSetup = initialState, action: Action) => {
+export const SetupReducer: ActionReducer<GameSetup> =  (state: GameSetup = initialState, action: Action) => {
   switch (action.type) {
     case SetupActions.NEW_GAME: {
       return action.payload;

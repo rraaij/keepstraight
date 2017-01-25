@@ -13,14 +13,6 @@ export class SetupActions {
     };
   }
 
-  static SAVE_SETUP_SUCCESS = '[SETUP] Save setup success';
-  saveSetupSuccess(gameSetup: GameSetup): Action {
-    return {
-      type: SetupActions.SAVE_SETUP_SUCCESS,
-      payload: gameSetup
-    }
-  }
-
   static LOAD_SETUP_SUCCESS = '[SETUP] Load setup success';
   loadSetupSuccess(gameData: any): Action {
     return {

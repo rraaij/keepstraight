@@ -1,8 +1,38 @@
-<ion-navbar *navbar>
-  <ion-title>GAME</ion-title>
-</ion-navbar>
+<ion-header>
+  <ion-navbar>
+    <ion-title>player {{ game.playerTurn | async }}</ion-title>
+
+    <ion-buttons end>
+      <button ion-button (click)="gotoSetup()">Setup</button>
+      <button ion-button (click)="showCorrectionModel()">
+        <ion-icon name="options"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
 
 <ion-content>
-  {{ setupInfo.playerOne | async }}
-  <button ion-button (click)="gotoSetup()">Setup</button>
+  <ion-grid>
+    <ion-row>
+      <ion-col width-50>
+        <p>links</p>
+        <!--<score-table [player]="game.playerOne.name"-->
+                     <!--[innings]="game.playerOne.innings"></score-table>-->
+      </ion-col>
+
+      <ion-col width-50>
+        <p>rechts</p>
+        <!--<score-table [player]="game.playerTwo.name"-->
+                     <!--[innings]="game.playerTwo.innings"></score-table>-->
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  {{ game | async | json }}
 </ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <button ion-button block (click)="rerack()">RERACK</button>
+    <button ion-button block (click)="updateScore()">UPDATE</button>
+  </ion-toolbar>
+</ion-footer>

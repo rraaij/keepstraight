@@ -27,12 +27,13 @@ export class SetupPage {
 
   startNewGame(setupInfo) {
     let setup: GameSetup = {
-      playerOne: setupInfo.playerOne,
-      playerTwo: setupInfo.playerTwo,
+      playerOne: { name: setupInfo.playerOne, innings: [] },
+      playerTwo: { name: setupInfo.playerTwo, innings: [] },
       targetscore: 100,
-      playerOneStarts: true
+      playerOneStarts: true,
+      playerTurn: 1
     }
     this.store.dispatch(this.setupActions.newGame(setup));
-    this.nav.push(GamePage, { setup: setup });
+    this.nav.push(GamePage, { setup });
   }
 }

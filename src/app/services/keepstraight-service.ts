@@ -28,14 +28,7 @@ export class KeepstraightService {
           if (docs.rows && docs.rows.length > 0) {
             return docs.rows[docs.rows.length-1].doc;
           }
-          return {
-            _id: '1',
-            _rev: 'x',
-            playerOne: 'PLAYER_ONE',
-            playerTwo: 'PLAYER_TWO',
-            targetscore: 100,
-            playerOneStarts: true
-          };
+          return;
         })
     )
   }
@@ -45,16 +38,14 @@ export class KeepstraightService {
 
       if (this.db) {
         // listen for changes on the database
-        this.db.changes(
-          {
-            live: true,
-            since: 'now',
-            include_docs: true
-          }
-        )
-          .on('change', change => {
-            observer.next(change.doc);
-          });
+        this.db.changes({
+          live: true,
+          since: 'now',
+          include_docs: true
+        })
+        .on('change', change => {
+          observer.next(change.doc);
+        });
       }
     });
   }

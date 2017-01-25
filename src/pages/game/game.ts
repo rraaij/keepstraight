@@ -21,6 +21,10 @@ export class GamePage {
     this.game = this.store.select(state => state.game);
   }
 
+  showCorrectionModel() {
+    console.log('showCorrectionModel');
+  }
+
   gotoSetup() {
     this.nav.pop();
   }
