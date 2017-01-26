@@ -1,0 +1,32 @@
+<b>{{ player }}</b>
+<ion-grid>
+  <ion-row>
+    <ion-col width-15>
+      <p>#</p>
+    </ion-col>
+    <ion-col width-25>
+      <p>run</p>
+    </ion-col>
+    <ion-col width-25>
+      <p>foul</p>
+    </ion-col>
+    <ion-col width-25>
+      <p>total</p>
+    </ion-col>
+  </ion-row>
+  <ion-row *ngFor="let inning of innings">
+    <ion-col width-15>
+      <p>{{ inning.inning }}</p>
+    </ion-col>
+    <ion-col width-25>
+      <p>{{ inning.run }}</p>
+    </ion-col>
+    <ion-col width-25>
+      <p>{{ inning.foul }}</p>
+    </ion-col>
+    <ion-col width-25>
+      <p>{{ inning.total }}</p>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+<b>{{ total }}</b>

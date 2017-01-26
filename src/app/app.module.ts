@@ -4,6 +4,7 @@ import { StoreModule, combineReducers} from '@ngrx/store';
 import { EffectsModule} from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { KeepstraightApp } from './app.component';
+import { ScoreTable } from '../pages/game/scoretable.component';
 import { SetupPage } from '../pages/setup/setup';
 import { GamePage } from '../pages/game/game';
 import { SetupReducer } from './reducers/setup-reducer';
@@ -16,7 +17,8 @@ import { SetupEffects } from './effects/setup-effects';
     declarations: [
       KeepstraightApp,
       SetupPage,
-      GamePage
+      GamePage,
+      ScoreTable
     ],
     imports: [
       IonicModule.forRoot(KeepstraightApp),
