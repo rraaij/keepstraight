@@ -1,4 +1,4 @@
-import {Injectable, Inject} from '@angular/core';
+import {Injectable} from '@angular/core';
 import { Action} from '@ngrx/store';
 
 import { GameSetup } from '../models/game-setup';
