@@ -1,16 +1,21 @@
-import { Component, OnChanges, SimpleChanges, Input } from '@angular/core';
+import { Component, OnChanges, SimpleChanges, Input, Output, EventEmitter } from '@angular/core';
+import { GameSetup } from '../../app/models/game-setup';
 
 @Component({
-  selector: 'game-setup',
+  selector: 'setup-controls',
   templateUrl: 'gamesetup.component.html'
 })
-export class GameSetup implements OnChanges {
+export class SetupControls implements OnChanges {
   @Input() gameSetup;
   playerOne: string;
   playerTwo: string;
   targetscore: number;
 
-  constructor() {}
+  @Output() onSetupChanged: EventEmitter<GameSetup>;
+
+  constructor() {
+    this.onSetupChanged = new EventEmitter<GameSetup>();
+  }
 
   ngOnChanges(changes: SimpleChanges) {
     console.log(changes['gameSetup'].currentValue);
@@ -21,9 +26,17 @@ export class GameSetup implements OnChanges {
 
   changeName(event, player) {
     console.log('>> CHANGE:', event, player);
+    if (player === 1 ) {
+      this.gameSetup.playerOne.name = event;
+    } else {
+      this.gameSetup.playerTwo.name = event;
+    }
+    this.onSetupChanged.emit(this.gameSetup);
   }
 
   changeTargetscore(event) {
     console.log('>> SCORE:', event);
+    this.gameSetup.targetscore = event;
+    this.onSetupChanged.emit(this.gameSetup);
   }
 }

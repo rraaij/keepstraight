@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { NavParams, NavController } from 'ionic-angular';
 import { GameSetup } from '../../app/models/game-setup';
@@ -9,8 +9,11 @@ import { Observable } from 'rxjs/rx';
   selector: 'page-game',
   templateUrl: 'game.html'
 })
-export class GamePage {
+export class GamePage implements OnInit {
   public game: Observable<GameSetup>;
+  playerturn: number;
+  playerOne: Object;
+  playerTwo: Object;
 
   constructor(
     public nav: NavController,
@@ -19,6 +22,16 @@ export class GamePage {
   ) {
     // this.setupInfo = params.get('setup');
     this.game = this.store.select(state => state.game);
+  }
+
+  ngOnInit() {
+    this.game.subscribe(
+      gamedata => {
+        this.playerOne = gamedata.playerOne;
+        this.playerTwo = gamedata.playerTwo;
+        this.playerturn = gamedata.playerTurn;
+      }
+    );
   }
 
   showCorrectionModel() {

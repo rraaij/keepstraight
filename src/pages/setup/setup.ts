@@ -14,7 +14,8 @@ import { SetupActions } from '../../app/actions';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SetupPage {
-  public setup: Observable<GameSetup>;
+  public gamesetup: Observable<GameSetup>;
+  setupData: GameSetup;
 
   constructor(
     public nav: NavController,
@@ -22,18 +23,27 @@ export class SetupPage {
     private setupActions: SetupActions
   ) {
     // 'game' here connects to 'game' in the AppState
-    this.setup = this.store.select(state => state.game);
+    this.gamesetup = this.store.select(state => state.game);
+  }
+
+  setupChanged(event) {
+    console.log('[SETUP] setupChanged(): ', event);
+
+    this.setupData = {
+      playerOne: { name: event.playerOne.name, innings: [] },
+      playerTwo: { name: event.playerTwo.name, innings: [] },
+      targetscore: event.targetscore,
+      playerOneStarts: event.playerOneStarts,
+      playerTurn: event.playerOneStarts ? 1 : 2
+    }
   }
 
   startNewGame(setupInfo) {
-    let setup: GameSetup = {
-      playerOne: { name: setupInfo.playerOne, innings: [] },
-      playerTwo: { name: setupInfo.playerTwo, innings: [] },
-      targetscore: 100,
-      playerOneStarts: true,
-      playerTurn: 1
+    if(setupInfo !== undefined) {
+      this.store.dispatch(this.setupActions.newGame(this.setupData));
+      this.nav.push(GamePage, {gamesetup: this.gamesetup});
+    } else {
+      console.error('[SETUP] startNewGame(setupinfo)', setupInfo);
     }
-    this.store.dispatch(this.setupActions.newGame(setup));
-    this.nav.push(GamePage, { setup });
   }
 }

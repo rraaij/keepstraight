@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>player {{ game.playerTurn }}</ion-title>
+    <ion-title>player {{ playerturn }}</ion-title>
 
     <ion-buttons end>
       <button ion-button (click)="gotoSetup()">Setup</button>
@@ -15,15 +15,13 @@
   <ion-grid>
     <ion-row>
       <ion-col width-50>
-        <score-table></score-table>
-        <!--<score-table [player]="game.playerOne.name"-->
-                     <!--[innings]="game.playerOne.innings"></score-table>-->
+        <score-table [player]="playerOne.name"
+                     [innings]="playerOne.innings"></score-table>
       </ion-col>
 
       <ion-col width-50>
-        <score-table></score-table>
-        <!--<score-table [player]="game.playerTwo.name"-->
-                     <!--[innings]="game.playerTwo.innings"></score-table>-->
+        <score-table [player]="playerTwo.name"
+                     [innings]="playerTwo.innings"></score-table>
       </ion-col>
     </ion-row>
   </ion-grid>
