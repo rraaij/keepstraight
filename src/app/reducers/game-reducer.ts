@@ -1,29 +1,18 @@
 import { Action, ActionReducer } from '@ngrx/store';
 
 import { GameSetup } from '../models';
-import { SetupActions } from '../actions';
+import { GameActions } from '../actions';
 
-const initialState: GameSetup = {
-  playerOne: { name: 'PLAYER_ONE', innings: [] },
-  playerTwo: { name: 'PLAYER_TWO', innings: [] },
-  targetscore: 100,
-  playerOneStarts: true,
-  playerTurn: 1
-};
+const initialState: Object = {};
 
-export const GameReducer: ActionReducer<GameSetup> =  (state: GameSetup = initialState, action: Action) => {
+export const GameReducer: ActionReducer<GameSetup> =  (state: Object = initialState, action: Action) => {
   switch (action.type) {
-    case SetupActions.NEW_GAME: {
+    case GameActions.NEW_GAME: {
       return action.payload;
     }
-    case SetupActions.LOAD_SETUP_SUCCESS: {
-      if (action.payload) {
-        return action.payload;
-      }
+    case GameActions.SAVE_SETUP_SUCCESS: {
+      if(!action.payload.ok) console.error(`[${action.type}] save setup FAILED`);
       return state;
-    }
-    case SetupActions.GAMEDATA_CHANGE_SUCCESS: {
-
     }
     default: {
       return state;

@@ -5,14 +5,6 @@ import { GameSetup } from '../models/game-setup';
 
 @Injectable()
 export class SetupActions {
-  static NEW_GAME = '[SETUP] New Game';
-  newGame(gameSetup: GameSetup): Action {
-    return {
-      type: SetupActions.NEW_GAME,
-      payload: gameSetup
-    };
-  }
-
   static LOAD_SETUP_SUCCESS = '[SETUP] Load setup success';
   loadSetupSuccess(gameData: any): Action {
     return {

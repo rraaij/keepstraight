@@ -16,7 +16,7 @@ export class SetupEffects {
   ) {}
 
   @Effect() saveSetup$ = this.actions$
-    .ofType(SetupActions.NEW_GAME)
+    .ofType(GameActions.NEW_GAME)
     .map<GameSetup>(toPayload)
     .mergeMap(gamesetup => {
       return this.db.saveSetup(gamesetup)

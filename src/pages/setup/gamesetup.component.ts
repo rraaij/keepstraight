@@ -25,7 +25,6 @@ export class SetupControls implements OnChanges {
   }
 
   changeName(event, player) {
-    console.log('>> CHANGE:', event, player);
     if (player === 1 ) {
       this.gameSetup.playerOne.name = event;
     } else {
@@ -35,7 +34,6 @@ export class SetupControls implements OnChanges {
   }
 
   changeTargetscore(event) {
-    console.log('>> SCORE:', event);
     this.gameSetup.targetscore = event;
     this.onSetupChanged.emit(this.gameSetup);
   }

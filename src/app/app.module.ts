@@ -24,7 +24,7 @@ import { SetupEffects } from './effects/setup-effects';
     ],
     imports: [
       IonicModule.forRoot(KeepstraightApp),
-      // 'game' here connects to 'game' in the AppState
+      // 'game' and 'setup' here connect to 'game' and 'setup' in the AppState
       StoreModule.provideStore(combineReducers({
         setup: SetupReducer,
         game: GameReducer

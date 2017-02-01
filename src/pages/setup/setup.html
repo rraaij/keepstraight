@@ -5,9 +5,13 @@
 </ion-header>
 
 <ion-content>
-  <setup-controls [gameSetup]="gamesetup | async" (onSetupChanged)="setupChanged($event)"></setup-controls>
+  <setup-controls [gameSetup]="setupData"
+                  (onSetupChanged)="setupChanged($event)">
+  </setup-controls>
 
-  {{ gamesetup | async | json }}
+  Gamesetup: {{ setup | async | json }}
+  <br/>
+  SetupData: {{ setupData | json }}
 </ion-content>
 
 <ion-footer>

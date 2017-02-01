@@ -27,9 +27,11 @@ export class GamePage implements OnInit {
   ngOnInit() {
     this.game.subscribe(
       gamedata => {
-        this.playerOne = gamedata.playerOne;
-        this.playerTwo = gamedata.playerTwo;
-        this.playerturn = gamedata.playerTurn;
+        if(gamedata.playerOne && gamedata.playerTwo && gamedata.playerTurn) {
+          this.playerOne = gamedata.playerOne;
+          this.playerTwo = gamedata.playerTwo;
+          this.playerturn = gamedata.playerTurn;
+        }
       }
     );
   }
