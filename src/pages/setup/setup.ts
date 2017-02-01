@@ -4,7 +4,7 @@ import { Observable } from 'rxjs/rx';
 import { NavController} from 'ionic-angular';
 
 import { GamePage } from '../game/game';
-import { GameSetup } from '../../app/models/game-setup';
+import { SetupModel } from '../../app/models';
 import { AppState } from '../../app/services/app-state';
 import { GameActions } from '../../app/actions';
 
@@ -14,8 +14,8 @@ import { GameActions } from '../../app/actions';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SetupPage implements OnInit {
-  public setup: Observable<GameSetup>;
-  setupData: GameSetup;
+  public setup: Observable<SetupModel>;
+  setupData: SetupModel;
 
   constructor(
     public nav: NavController,
@@ -47,7 +47,7 @@ export class SetupPage implements OnInit {
   startNewGame() {
     if(this.setupData !== undefined) {
       this.store.dispatch(this.gameActions.newGame(this.setupData));
-      this.nav.push(GamePage, {gamesetup: this.setup});
+      this.nav.push(GamePage, {SetupModel: this.setup});
     } else {
       console.error('[SETUP] startNewGame(setupinfo)', this.setupData);
     }

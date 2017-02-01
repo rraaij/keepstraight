@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Effect, toPayload, Actions } from '@ngrx/effects';
 
 import { KeepstraightService } from '../services/keepstraight-service';
-import { GameSetup } from '../models/game-setup';
+import { SetupModel } from '../models/setup-model';
 import { SetupActions, GameActions } from '../actions';
 
 @Injectable()
@@ -17,9 +17,9 @@ export class SetupEffects {
 
   @Effect() saveSetup$ = this.actions$
     .ofType(GameActions.NEW_GAME)
-    .map<GameSetup>(toPayload)
-    .mergeMap(gamesetup => {
-      return this.db.saveSetup(gamesetup)
+    .map<SetupModel>(toPayload)
+    .mergeMap(setup => {
+      return this.db.saveSetup(setup)
     })
     .map(game$ => {
       return this.gameActions.saveSetupSuccess(game$)

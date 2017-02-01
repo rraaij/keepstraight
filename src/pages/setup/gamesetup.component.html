@@ -12,12 +12,11 @@
   </ion-item>
 
   <ion-item>
-    <button ion-button large item-left (click)="editTargetscore($event, -5)">
+    <button ion-button large item-left (click)="editTargetscore(-5)">
       <ion-icon name="ios-remove-outline"></ion-icon>
     </button>
-    <!--<ion-input large type="number" placeholder="0" [value]="targetscore"></ion-input>-->
     <p class="score">{{targetscore}}</p>
-    <button ion-button large item-right (click)="editTargetscore($event, 5)">
+    <button ion-button large item-right (click)="editTargetscore(5)">
       <ion-icon name="ios-add-outline"></ion-icon>
     </button>
   </ion-item>
@@ -25,11 +24,11 @@
   <ion-item>
     <button ion-button outline item-left
             [ngClass]="{true: button, false: outline}[playerOneStarts]"
-            (click)="selectStartingPlayer($event, 1)">
+            (click)="selectStartingPlayer(1)">
       <ion-icon name="checkmark-circle" *ngIf="playerOneStarts"></ion-icon> Player 1 starts</button>
     <button ion-button outline item-right
             [ngClass]="{true: 'button', false: 'button-outline'}[!playerOneStarts]"
-            (click)="selectStartingPlayer($event, 2)">
+            (click)="selectStartingPlayer(2)">
       <ion-icon name="checkmark-circle" *ngIf="!playerOneStarts"></ion-icon> Player 2 starts</button>
   </ion-item>
 </ion-list>

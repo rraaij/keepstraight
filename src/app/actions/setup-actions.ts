@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Action } from '@ngrx/store';
 
-import { GameSetup } from '../models/game-setup';
+import { SetupModel } from '../models/setup-model';
 
 @Injectable()
 export class SetupActions {

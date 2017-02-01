@@ -1,11 +1,11 @@
 import { Action, ActionReducer } from '@ngrx/store';
 
-import { GameSetup } from '../models';
+import { GameModel } from '../models';
 import { GameActions } from '../actions';
 
 const initialState: Object = {};
 
-export const GameReducer: ActionReducer<GameSetup> =  (state: Object = initialState, action: Action) => {
+export const GameReducer: ActionReducer<GameModel> =  (state: Object = initialState, action: Action) => {
   switch (action.type) {
     case GameActions.NEW_GAME: {
       return action.payload;

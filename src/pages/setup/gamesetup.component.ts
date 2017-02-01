@@ -1,5 +1,5 @@
 import { Component, OnChanges, SimpleChanges, Input, Output, EventEmitter } from '@angular/core';
-import { GameSetup } from '../../app/models/game-setup';
+import { SetupModel } from '../../app/models/setup-model';
 
 @Component({
   selector: 'setup-controls',
@@ -20,10 +20,10 @@ export class SetupControls implements OnChanges {
   playerOneStarts: boolean = true;
   targetscore: number;
 
-  @Output() onSetupChanged: EventEmitter<GameSetup>;
+  @Output() onSetupChanged: EventEmitter<SetupModel>;
 
   constructor() {
-    this.onSetupChanged = new EventEmitter<GameSetup>();
+    this.onSetupChanged = new EventEmitter<SetupModel>();
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -43,13 +43,13 @@ export class SetupControls implements OnChanges {
     this.onSetupChanged.emit(this.gameSetup);
   }
 
-  editTargetscore(event, editvalue) {
+  editTargetscore(editvalue) {
     this.gameSetup.targetscore += editvalue;
     this.targetscore = this.gameSetup.targetscore;
     this.onSetupChanged.emit(this.gameSetup);
   }
 
-  selectStartingPlayer(event, player) {
+  selectStartingPlayer(player) {
     this.gameSetup.playerOneStarts = player === 1;
     this.playerOneStarts = this.gameSetup.playerOneStarts;
     this.onSetupChanged.emit(this.gameSetup);

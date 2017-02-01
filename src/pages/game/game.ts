@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { NavParams, NavController } from 'ionic-angular';
-import { GameSetup } from '../../app/models/game-setup';
+import { NavController } from 'ionic-angular';
+import { GameModel } from '../../app/models';
 import { AppState } from '../../app/services/app-state';
 import { Observable } from 'rxjs/rx';
 
@@ -10,17 +10,15 @@ import { Observable } from 'rxjs/rx';
   templateUrl: 'game.html'
 })
 export class GamePage implements OnInit {
-  public game: Observable<GameSetup>;
+  public game: Observable<GameModel>;
   playerturn: number;
   playerOne: Object;
   playerTwo: Object;
 
   constructor(
     public nav: NavController,
-    private params: NavParams,
     private store: Store<AppState>
   ) {
-    // this.setupInfo = params.get('setup');
     this.game = this.store.select(state => state.game);
   }
 
