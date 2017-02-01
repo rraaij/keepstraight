@@ -6,7 +6,8 @@ import { NavController} from 'ionic-angular';
 import { GamePage } from '../game/game';
 import { SetupModel } from '../../app/models';
 import { AppState } from '../../app/services/app-state';
-import { GameActions } from '../../app/actions';
+import { GameModel } from "../../app/models/game-model";
+import {GameActions} from "../../app/actions/game-actions";
 
 @Component({
   selector: 'page-setup',
@@ -36,18 +37,23 @@ export class SetupPage implements OnInit {
 
   setupChanged(event) {
     this.setupData = {
-      playerOne: { name: event.playerOne.name, innings: [] },
-      playerTwo: { name: event.playerTwo.name, innings: [] },
+      playerOne: event.playerOne,
+      playerTwo: event.playerTwo,
       targetscore: event.targetscore,
-      playerOneStarts: event.playerOneStarts,
-      playerTurn: event.playerOneStarts ? 1 : 2
+      playerOneStarts: event.playerOneStarts
     }
   }
 
   startNewGame() {
     if(this.setupData !== undefined) {
-      this.store.dispatch(this.gameActions.newGame(this.setupData));
-      this.nav.push(GamePage, {SetupModel: this.setup});
+      let game: GameModel = {
+        playerOne: { name: this.setupData.playerOne, innings: [] },
+        playerTwo: { name: this.setupData.playerTwo, innings: [] },
+        targetscore: this.setupData.targetscore,
+        playerTurn: this.setupData.playerOneStarts ? 1 : 2
+      };
+      this.store.dispatch(this.gameActions.newGame(game));
+      this.nav.push(GamePage);
     } else {
       console.error('[SETUP] startNewGame(setupinfo)', this.setupData);
     }

@@ -38,6 +38,14 @@ export class GamePage implements OnInit {
     console.log('showCorrectionModel');
   }
 
+  rerack() {
+    console.log('rerack');
+  }
+
+  updateScore() {
+    console.log('updateScore');
+  }
+
   gotoSetup() {
     this.nav.pop();
   }

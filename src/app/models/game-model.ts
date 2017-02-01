@@ -4,16 +4,15 @@ export interface GameModel {
   playerOne: PlayerInfo,
   playerTwo: PlayerInfo,
   targetscore: number,
-  playerOneStarts: boolean,
-  playerTurn?: number
+  playerTurn: number
 }
 
-interface PlayerInfo {
+export interface PlayerInfo {
   name: string,
-  innings?: Inning[]
+  innings?: Array<Inning>
 }
 
-interface Inning {
+export interface Inning {
   nr: number,
   run: number,
   foul: boolean,

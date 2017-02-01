@@ -4,18 +4,22 @@ import { SetupModel } from '../models';
 import { SetupActions } from '../actions';
 
 const initialState: SetupModel = {
-  playerOne: { name: '', innings: [] },
-  playerTwo: { name: '', innings: [] },
+  playerOne: '',
+  playerTwo: '',
   targetscore: 100,
-  playerOneStarts: true,
-  playerTurn: 1
+  playerOneStarts: true
 };
 
 export const SetupReducer: ActionReducer<SetupModel> =  (state: SetupModel = initialState, action: Action) => {
   switch (action.type) {
     case SetupActions.LOAD_SETUP_SUCCESS: {
       if (action.payload) {
-        return action.payload;
+        state = {
+          playerOne: action.payload.playerOne.name,
+          playerTwo: action.payload.playerTwo.name,
+          targetscore: action.payload.targetscore,
+          playerOneStarts: action.payload.playerTurn === 1
+        }
       }
       return state;
     }

@@ -1,18 +1,18 @@
 import {Injectable} from '@angular/core';
 import { Action} from '@ngrx/store';
 
-import { SetupModel } from '../models/setup-model';
+import { SetupModel, GameModel } from '../models';
 
 @Injectable()
 export class GameActions {
+
   static NEW_GAME = '[SETUP] New Game';
-  newGame(setup: SetupModel): Action {
+  newGame(game: GameModel): Action {
     return {
       type: GameActions.NEW_GAME,
-      payload: setup
+      payload: game
     };
   }
-
   static SAVE_SETUP_SUCCESS = '[SETUP] Save setup success';
   saveSetupSuccess(setup: SetupModel): Action {
     return {

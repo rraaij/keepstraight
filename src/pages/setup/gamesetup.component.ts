@@ -1,4 +1,4 @@
-import { Component, OnChanges, SimpleChanges, Input, Output, EventEmitter } from '@angular/core';
+import {Component, OnChanges, SimpleChanges, Input, Output, EventEmitter} from '@angular/core';
 import { SetupModel } from '../../app/models/setup-model';
 
 @Component({
@@ -14,7 +14,7 @@ import { SetupModel } from '../../app/models/setup-model';
   `]
 })
 export class SetupControls implements OnChanges {
-  @Input() gameSetup;
+  @Input() gameSetup: SetupModel;
   playerOne: string;
   playerTwo: string;
   playerOneStarts: boolean = true;
@@ -28,17 +28,17 @@ export class SetupControls implements OnChanges {
 
   ngOnChanges(changes: SimpleChanges) {
     console.log(changes['gameSetup'].currentValue);
-    this.playerOne = this.gameSetup.playerOne.name;
-    this.playerTwo = this.gameSetup.playerTwo.name;
+    this.playerOne = this.gameSetup.playerOne;
+    this.playerTwo = this.gameSetup.playerTwo;
     this.targetscore = this.gameSetup.targetscore;
     this.playerOneStarts = this.gameSetup.playerOneStarts;
   }
 
   changeName(event, player) {
     if (player === 1 ) {
-      this.gameSetup.playerOne.name = event;
+      this.gameSetup.playerOne = event;
     } else {
-      this.gameSetup.playerTwo.name = event;
+      this.gameSetup.playerTwo = event;
     }
     this.onSetupChanged.emit(this.gameSetup);
   }
