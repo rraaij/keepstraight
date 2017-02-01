@@ -38,12 +38,12 @@ export class SetupPage {
     }
   }
 
-  startNewGame(setupInfo) {
-    if(setupInfo !== undefined) {
+  startNewGame() {
+    if(this.setupData !== undefined) {
       this.store.dispatch(this.setupActions.newGame(this.setupData));
       this.nav.push(GamePage, {gamesetup: this.gamesetup});
     } else {
-      console.error('[SETUP] startNewGame(setupinfo)', setupInfo);
+      console.error('[SETUP] startNewGame(setupinfo)', this.setupData);
     }
   }
 }
