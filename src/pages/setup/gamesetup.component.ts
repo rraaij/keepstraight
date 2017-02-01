@@ -3,12 +3,21 @@ import { GameSetup } from '../../app/models/game-setup';
 
 @Component({
   selector: 'setup-controls',
-  templateUrl: 'gamesetup.component.html'
+  templateUrl: 'gamesetup.component.html',
+  styles: [`
+    .score {
+        font-size: xx-large;
+        font-weight: bold;
+        text-align: center;
+        color: #387ef5;
+    }
+  `]
 })
 export class SetupControls implements OnChanges {
   @Input() gameSetup;
   playerOne: string;
   playerTwo: string;
+  playerOneStarts: boolean = true;
   targetscore: number;
 
   @Output() onSetupChanged: EventEmitter<GameSetup>;
@@ -22,6 +31,7 @@ export class SetupControls implements OnChanges {
     this.playerOne = this.gameSetup.playerOne.name;
     this.playerTwo = this.gameSetup.playerTwo.name;
     this.targetscore = this.gameSetup.targetscore;
+    this.playerOneStarts = this.gameSetup.playerOneStarts;
   }
 
   changeName(event, player) {
@@ -33,8 +43,15 @@ export class SetupControls implements OnChanges {
     this.onSetupChanged.emit(this.gameSetup);
   }
 
-  changeTargetscore(event) {
-    this.gameSetup.targetscore = event;
+  editTargetscore(event, editvalue) {
+    this.gameSetup.targetscore += editvalue;
+    this.targetscore = this.gameSetup.targetscore;
+    this.onSetupChanged.emit(this.gameSetup);
+  }
+
+  selectStartingPlayer(event, player) {
+    this.gameSetup.playerOneStarts = player === 1;
+    this.playerOneStarts = this.gameSetup.playerOneStarts;
     this.onSetupChanged.emit(this.gameSetup);
   }
 }
