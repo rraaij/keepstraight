@@ -1,7 +1,7 @@
 import {Component, ChangeDetectionStrategy, OnInit} from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/rx';
-import { NavController} from 'ionic-angular';
+import { NavController, ActionSheetController } from 'ionic-angular';
 
 import { GamePage } from '../game/game';
 import { SetupModel } from '../../app/models';
@@ -12,7 +12,14 @@ import {GameActions} from "../../app/actions/game-actions";
 @Component({
   selector: 'page-setup',
   templateUrl: 'setup.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  styles: [`
+    .setup-actionsheet {
+      .action-sheet-cancel ion-icon,
+      .action-sheet-destructive ion-icon {
+          color: #757575;
+      }
+  `]
 })
 export class SetupPage implements OnInit {
   public setup: Observable<SetupModel>;
@@ -20,6 +27,7 @@ export class SetupPage implements OnInit {
 
   constructor(
     public nav: NavController,
+    public actionsheet: ActionSheetController,
     private store: Store<AppState>,
     private gameActions: GameActions
   ) {
@@ -45,17 +53,43 @@ export class SetupPage implements OnInit {
   }
 
   startNewGame() {
-    if(this.setupData !== undefined) {
-      let game: GameModel = {
-        playerOne: { name: this.setupData.playerOne, innings: [] },
-        playerTwo: { name: this.setupData.playerTwo, innings: [] },
-        targetscore: this.setupData.targetscore,
-        playerTurn: this.setupData.playerOneStarts ? 1 : 2
-      };
-      this.store.dispatch(this.gameActions.newGame(game));
-      this.nav.push(GamePage);
+    if(!this.setupData.playerOne || this.setupData.playerOne === "" || !this.setupData.playerTwo || this.setupData.playerTwo === "") {
+      let actionsheet = this.actionsheet.create({
+        title: 'You didn\'t specify both player\'s usernames. Their names will be \'Player One\' and \'Player Two\'. Is that okay?',
+        cssClass: 'setup-actionsheet',
+        buttons: [
+          {
+            text: 'No, I\'ll specify their names.',
+            icon: 'md-alert',
+            role: 'cancel'
+          },
+          {
+            text: 'Yes, that\'s fine.',
+            icon: 'md-checkmark-circle',
+            role: 'destructive',
+            handler: () => {
+              this.setupData.playerOne = "Player One";
+              this.setupData.playerTwo = "Player Two";
+              this.newGame(this.setupData);
+            }
+          }
+        ]
+      });
+      actionsheet.present();
     } else {
-      console.error('[SETUP] startNewGame(setupinfo)', this.setupData);
+      this.newGame(this.setupData);
     }
+  }
+
+  private newGame(setup: SetupModel) {
+    let game: GameModel = {
+      playerOne: { name: setup.playerOne, innings: [] },
+      playerTwo: { name: setup.playerTwo, innings: [] },
+      targetscore: setup.targetscore,
+      playerTurn: setup.playerOneStarts ? 1 : 2
+    };
+
+    this.store.dispatch(this.gameActions.newGame(game));
+    this.nav.push(GamePage);
   }
 }
