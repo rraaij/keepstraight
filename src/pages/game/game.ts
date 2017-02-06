@@ -15,6 +15,8 @@ export class GamePage implements OnInit {
   public game: Observable<GameModel>;
   playerOne: Object;
   playerTwo: Object;
+  targetscore: number;
+  possibleRun: number;
 
   constructor(
     public nav: NavController,
@@ -22,6 +24,8 @@ export class GamePage implements OnInit {
     private gameActions: GameActions
   ) {
     this.game = this.store.select(state => state.game);
+
+    this.possibleRun = 15;
   }
 
   ngOnInit() {
@@ -30,9 +34,21 @@ export class GamePage implements OnInit {
         if(gamedata.playerOne && gamedata.playerTwo) {
           this.playerOne = gamedata.playerOne;
           this.playerTwo = gamedata.playerTwo;
+          this.targetscore = gamedata.targetscore;
         }
       }
     );
+  }
+
+  getCurrentScore(player) {
+    let total = 0;
+    const innings = this[`player${player}`].innings;
+    if (innings.length > 0) {
+      innings.map(inning => {
+        total += inning.run;
+      })
+    }
+    return total;
   }
 
   showCorrectionModel() {
@@ -40,7 +56,7 @@ export class GamePage implements OnInit {
   }
 
   rerack() {
-    console.log('rerack');
+    this.possibleRun += 14;
   }
 
   updateScore() {

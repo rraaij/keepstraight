@@ -17,16 +17,18 @@ export const GameReducer: ActionReducer<GameModel> =  (state: GameModel = initia
     }
 
     case GameActions.SUBMIT_INNING: {
-      let player = state.playerOne.hasTurn ? 'One' : 'Two';
+      const player = state.playerOne.hasTurn ? 'One' : 'Two';
+      let innings = state[`player${player}`].innings;
+      const lastInning = innings.length > 0 ? innings[innings.length-1] : { inning: 0, score: 0 };
 
         // TODO: SubmitInning here!
       let inning: Inning = {
-        inning: 0,
+        inning: lastInning.inning + 1,
         run: action.payload.inning.run,
         foul: action.payload.inning.foul,
-        score: action.payload.inning.run
+        score: lastInning.score + action.payload.inning.run
       }
-      state[`player${player}`].innings.push(inning);
+      innings.push(inning);
       return state;
     }
 

@@ -20,6 +20,8 @@ export class ScoreTable {
   ) {}
 
   toggleTurn(event) {
-    this.store.dispatch(this.gameActions.switchPlayer());
+    if(!this.hasTurn) {
+      this.store.dispatch(this.gameActions.switchPlayer());
+    }
   }
 }
