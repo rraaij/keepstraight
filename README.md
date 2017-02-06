@@ -8,3 +8,4 @@ TODO:
 
 [] split setup object and game object
 
+[] add jest for unit testing

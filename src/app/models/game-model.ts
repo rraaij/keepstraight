@@ -13,8 +13,8 @@ export interface PlayerInfo {
 }
 
 export interface Inning {
-  nr: number,
+  inning?: number,
   run: number,
   foul: boolean,
-  score: number
+  score?: number
 }

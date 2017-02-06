@@ -7,8 +7,9 @@ import { Observable } from 'rxjs/rx';
   templateUrl: 'scoretable.component.html'
 })
 export class ScoreTable {
-  @Input() player;
+  @Input() player: string;
   @Input() innings: Observable<Array<Object>>;
+  @Input() turn: number;
   total: number = 0;
 
   constructor() {}

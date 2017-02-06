@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Action } from '@ngrx/store';
 
-import {GameModel} from "../models/game-model";
-
 @Injectable()
 export class SetupActions {
   static LOAD_SETUP_SUCCESS = '[SETUP] Load setup success';
