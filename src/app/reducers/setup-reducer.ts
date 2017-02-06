@@ -18,7 +18,7 @@ export const SetupReducer: ActionReducer<SetupModel> =  (state: SetupModel = ini
           playerOne: action.payload.playerOne.name,
           playerTwo: action.payload.playerTwo.name,
           targetscore: action.payload.targetscore,
-          playerOneStarts: action.payload.playerTurn === 1
+          playerOneStarts: action.payload.playerOne.hasTurn
         }
       }
       return state;

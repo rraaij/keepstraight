@@ -3,12 +3,12 @@ export interface GameModel {
   _rev?: string,
   playerOne: PlayerInfo,
   playerTwo: PlayerInfo,
-  targetscore: number,
-  playerTurn: number
+  targetscore: number
 }
 
 export interface PlayerInfo {
   name: string,
+  hasTurn: boolean,
   innings?: Array<Inning>
 }
 

@@ -13,7 +13,6 @@ import {GameActions} from "../../app/actions/game-actions";
 })
 export class GamePage implements OnInit {
   public game: Observable<GameModel>;
-  playerturn: number;
   playerOne: Object;
   playerTwo: Object;
 
@@ -28,10 +27,9 @@ export class GamePage implements OnInit {
   ngOnInit() {
     this.game.subscribe(
       gamedata => {
-        if(gamedata.playerOne && gamedata.playerTwo && gamedata.playerTurn) {
+        if(gamedata.playerOne && gamedata.playerTwo) {
           this.playerOne = gamedata.playerOne;
           this.playerTwo = gamedata.playerTwo;
-          this.playerturn = gamedata.playerTurn;
         }
       }
     );

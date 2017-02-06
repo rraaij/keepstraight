@@ -15,12 +15,12 @@
   <ion-grid>
     <ion-row>
       <ion-col width-50>
-        <score-table [player]="playerOne.name" [turn]="game.playerTurn"
+        <score-table [player]="playerOne.name" [hasTurn]="playerOne.hasTurn"
                      [innings]="playerOne.innings"></score-table>
       </ion-col>
 
       <ion-col width-50>
-        <score-table [player]="playerTwo.name"
+        <score-table [player]="playerTwo.name"  [hasTurn]="playerTwo.hasTurn"
                      [innings]="playerTwo.innings"></score-table>
       </ion-col>
     </ion-row>

@@ -12,14 +12,7 @@ import {GameActions} from "../../app/actions/game-actions";
 @Component({
   selector: 'page-setup',
   templateUrl: 'setup.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  styles: [`
-    .setup-actionsheet {
-      .action-sheet-cancel ion-icon,
-      .action-sheet-destructive ion-icon {
-          color: #757575;
-      }
-  `]
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SetupPage implements OnInit {
   public setup: Observable<SetupModel>;
@@ -31,7 +24,7 @@ export class SetupPage implements OnInit {
     private store: Store<AppState>,
     private gameActions: GameActions
   ) {
-    // 'game' here connects to 'game' in the AppState
+    // 'setup' here connects to 'setup' in the AppState
     this.setup = this.store.select(state => state.setup);
   }
 
@@ -83,10 +76,9 @@ export class SetupPage implements OnInit {
 
   private newGame(setup: SetupModel) {
     let game: GameModel = {
-      playerOne: { name: setup.playerOne, innings: [] },
-      playerTwo: { name: setup.playerTwo, innings: [] },
-      targetscore: setup.targetscore,
-      playerTurn: setup.playerOneStarts ? 1 : 2
+      playerOne: { name: setup.playerOne, hasTurn: setup.playerOneStarts, innings: [] },
+      playerTwo: { name: setup.playerTwo, hasTurn: !setup.playerOneStarts, innings: [] },
+      targetscore: setup.targetscore
     };
 
     this.store.dispatch(this.gameActions.newGame(game));

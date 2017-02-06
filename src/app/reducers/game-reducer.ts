@@ -5,10 +5,9 @@ import { GameActions } from '../actions';
 import {Inning} from "../models/game-model";
 
 const initialState: GameModel = {
-  playerOne: { name: '' },
-  playerTwo: { name: '' },
-  targetscore: 100,
-  playerTurn: 1
+  playerOne: { name: '', hasTurn: true },
+  playerTwo: { name: '', hasTurn: false },
+  targetscore: 100
 };
 
 export const GameReducer: ActionReducer<GameModel> =  (state: GameModel = initialState, action: Action) => {
@@ -18,7 +17,7 @@ export const GameReducer: ActionReducer<GameModel> =  (state: GameModel = initia
     }
 
     case GameActions.SUBMIT_INNING: {
-      let player = state.playerTurn === 1 ? 'One' : 'Two';
+      let player = state.playerOne.hasTurn ? 'One' : 'Two';
 
         // TODO: SubmitInning here!
       let inning: Inning = {
@@ -32,8 +31,8 @@ export const GameReducer: ActionReducer<GameModel> =  (state: GameModel = initia
     }
 
     case GameActions.SWITCH_PLAYER: {
-      // TODO: switchPlayer
-      state.playerTurn = state.playerTurn === 1 ? 2 : 1;
+      state.playerOne.hasTurn = !state.playerOne.hasTurn;
+      state.playerTwo.hasTurn = !state.playerTwo.hasTurn;
       return state;
     }
 

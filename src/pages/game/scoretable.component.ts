@@ -1,6 +1,8 @@
 import { Component, Input } from '@angular/core';
-// import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/rx';
+import {AppState} from "../../app/services/app-state";
+import {Store} from "@ngrx/store";
+import {GameActions} from "../../app/actions/game-actions";
 
 @Component({
   selector: 'score-table',
@@ -9,8 +11,15 @@ import { Observable } from 'rxjs/rx';
 export class ScoreTable {
   @Input() player: string;
   @Input() innings: Observable<Array<Object>>;
-  @Input() turn: number;
+  @Input() hasTurn: boolean;
   total: number = 0;
 
-  constructor() {}
+  constructor(
+    private store: Store<AppState>,
+    private gameActions: GameActions
+  ) {}
+
+  toggleTurn(event) {
+    this.store.dispatch(this.gameActions.switchPlayer());
+  }
 }
