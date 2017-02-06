@@ -1,7 +1,11 @@
-.tableActive {
-  border: 3px solid blue;
+.table-active {
+  border: 3px solid #387ef5;
 }
 
-.tableInactive {
+.table-inactive {
   border: none;
+}
+
+.scoretable-playername {
+  text-align: center;
 }

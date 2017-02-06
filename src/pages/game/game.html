@@ -32,15 +32,24 @@
   <ion-grid>
     <ion-row>
       <ion-col width-50>
-        <p>Score: {{ getCurrentScore('One') }}</p>
+        <ion-card class="score-container">
+          <b class="title">Score:</b>
+          <b class="number">{{ getCurrentScore('One') }}</b>
+        </ion-card>
       </ion-col>
 
       <ion-col width-50>
-        <p>Score: {{ getCurrentScore('Two') }}</p>
+        <ion-card class="score-container">
+          <b class="title">Score:</b>
+          <b class="number">{{ getCurrentScore('Two') }}</b>
+        </ion-card>
       </ion-col>
     </ion-row>
     <ion-row>
-      <p>Possible Run: {{ possibleRun }}</p>
+      <div class="possible-run">
+        <b class="title">Possible Run:</b>
+        <b class="number">{{ possibleRun }}</b>
+      </div>
     </ion-row>
   </ion-grid>
   <ion-toolbar>

@@ -63,7 +63,7 @@ export class GamePage implements OnInit {
     this.store.dispatch(this.gameActions.submitInning(
       {
         run: Math.floor(Math.random() * 12) + 1,
-        foul: false
+        foul: true
       }
     ));
     this.store.dispatch(this.gameActions.switchPlayer());
