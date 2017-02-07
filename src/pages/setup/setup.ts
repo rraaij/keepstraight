@@ -1,4 +1,4 @@
-import {Component, ChangeDetectionStrategy, OnInit} from '@angular/core';
+import {Component, ChangeDetectionStrategy, OnInit, ChangeDetectorRef} from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/rx';
 import { NavController, ActionSheetController } from 'ionic-angular';
@@ -22,7 +22,8 @@ export class SetupPage implements OnInit {
     public nav: NavController,
     public actionsheet: ActionSheetController,
     private store: Store<AppState>,
-    private gameActions: GameActions
+    private gameActions: GameActions,
+    private ref: ChangeDetectorRef
   ) {
     // 'setup' here connects to 'setup' in the AppState
     this.setup = this.store.select(state => state.setup);
@@ -31,6 +32,11 @@ export class SetupPage implements OnInit {
   ngOnInit() {
     this.setup.subscribe(
       gamedata => {
+        this.ref.markForCheck();
+        setInterval(() => {
+          this.ref.markForCheck();
+        }, 100);
+
         this.setupData = gamedata;
       }
     );

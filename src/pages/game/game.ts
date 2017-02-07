@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component, OnInit, ChangeDetectorRef} from '@angular/core';
 import { Store } from '@ngrx/store';
 import { NavController, ModalController } from 'ionic-angular';
 import { UpdateScore } from './updatescore.modal';
@@ -6,6 +6,7 @@ import { Game } from '../../app/models';
 import { AppState } from '../../app/services/app-state';
 import { Observable } from 'rxjs/rx';
 import {Player} from "../../app/models/game-model";
+import {GameActions} from "../../app/actions/game-actions";
 
 @Component({
   selector: 'page-game',
@@ -22,16 +23,24 @@ export class GamePage implements OnInit {
   constructor(
     public nav: NavController,
     public modal: ModalController,
-    private store: Store<AppState>
+    private store: Store<AppState>,
+    private gameActions: GameActions,
+    private ref: ChangeDetectorRef
   ) {
     this.game = this.store.select(state => state.game);
 
     this.possibleRun = 15;
+
   }
 
   ngOnInit() {
     this.game.subscribe(
       gamedata => {
+        this.ref.markForCheck();
+        setInterval(() => {
+          this.ref.markForCheck();
+        }, 100);
+
         if(gamedata.playerOne && gamedata.playerTwo) {
           this.playerOne = gamedata.playerOne;
           this.playerTwo = gamedata.playerTwo;
@@ -63,6 +72,19 @@ export class GamePage implements OnInit {
   updateScore() {
     const player = this.playerOne.hasTurn ? this.playerOne : this.playerTwo;
     let modal = this.modal.create(UpdateScore, { player, run: this.possibleRun});
+
+    modal.onDidDismiss(data => {
+      if (data) {
+        this.store.dispatch(this.gameActions.submitInning(
+          {
+            run: this.possibleRun - data.balls - (data.foul ? 1 : 0),
+            foul: data.foul
+          }
+        ));
+        this.store.dispatch(this.gameActions.switchPlayer());
+      }
+    });
+
     modal.present();
   }
 

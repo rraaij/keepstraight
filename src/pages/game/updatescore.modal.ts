@@ -1,9 +1,6 @@
 import { Component } from '@angular/core';
-import { Store } from '@ngrx/store';
 import { Platform, NavParams, ViewController } from 'ionic-angular';
 import {Player} from "../../app/models/game-model";
-import {GameActions} from "../../app/actions/game-actions";
-import {AppState} from "../../app/services/app-state";
 
 @Component({
   templateUrl: 'updatescore.modal.html',
@@ -23,9 +20,7 @@ export class UpdateScore {
 
   constructor(public platform: Platform,
               public params: NavParams,
-              public viewCtrl: ViewController,
-              private store: Store<AppState>,
-              private gameActions: GameActions
+              public viewCtrl: ViewController
   ) {
     this.player = params.get('player');
     this.run = params.get('run');
@@ -36,13 +31,6 @@ export class UpdateScore {
   }
 
   submit() {
-    this.store.dispatch(this.gameActions.submitInning(
-      {
-        run: this.run - this.balls - (this.foul ? 1 : 0),
-        foul: this.foul
-      }
-    ));
-    this.store.dispatch(this.gameActions.switchPlayer());
-    this.viewCtrl.dismiss();
+    this.viewCtrl.dismiss({ balls: this.balls, foul: this.foul });
   }
 }
