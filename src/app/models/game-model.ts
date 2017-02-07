@@ -1,12 +1,12 @@
-export interface GameModel {
+export interface Game {
   _id?: string,
   _rev?: string,
-  playerOne: PlayerInfo,
-  playerTwo: PlayerInfo,
+  playerOne: Player,
+  playerTwo: Player,
   targetscore: number
 }
 
-export interface PlayerInfo {
+export interface Player {
   name: string,
   hasTurn: boolean,
   innings?: Array<Inning>

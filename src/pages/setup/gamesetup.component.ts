@@ -1,5 +1,5 @@
 import {Component, OnChanges, SimpleChanges, Input, Output, EventEmitter} from '@angular/core';
-import { SetupModel } from '../../app/models/setup-model';
+import { Setup } from '../../app/models/setup-model';
 
 @Component({
   selector: 'setup-controls',
@@ -13,16 +13,16 @@ import { SetupModel } from '../../app/models/setup-model';
   `]
 })
 export class SetupControls implements OnChanges {
-  @Input() gameSetup: SetupModel;
+  @Input() gameSetup: Setup;
   playerOne: string;
   playerTwo: string;
   playerOneStarts: boolean = true;
   targetscore: number;
 
-  @Output() onSetupChanged: EventEmitter<SetupModel>;
+  @Output() onSetupChanged: EventEmitter<Setup>;
 
   constructor() {
-    this.onSetupChanged = new EventEmitter<SetupModel>();
+    this.onSetupChanged = new EventEmitter<Setup>();
   }
 
   ngOnChanges(changes: SimpleChanges) {

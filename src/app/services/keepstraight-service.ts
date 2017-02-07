@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Platform } from 'ionic-angular';
 import { Observable } from 'rxjs/Rx';
-import { GameModel } from '../models';
+import { Game } from '../models';
 
 import * as PouchDB from 'pouchdb';
 
@@ -50,7 +50,7 @@ export class KeepstraightService {
     });
   }
 
-  saveSetup(setup: GameModel) : Promise<any> {
+  saveSetup(setup: Game) : Promise<any> {
     return this.db.post(setup);
   }
 }

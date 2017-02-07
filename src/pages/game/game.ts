@@ -2,10 +2,10 @@ import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
 import { Store } from '@ngrx/store';
 import { NavController, ModalController } from 'ionic-angular';
 import { UpdateScore } from './updatescore.modal';
-import { GameModel } from '../../app/models';
+import { Game } from '../../app/models';
 import { AppState } from '../../app/services/app-state';
 import { Observable } from 'rxjs/rx';
-import {GameActions} from "../../app/actions/game-actions";
+import {Player} from "../../app/models/game-model";
 
 @Component({
   selector: 'page-game',
@@ -13,17 +13,16 @@ import {GameActions} from "../../app/actions/game-actions";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class GamePage implements OnInit {
-  public game: Observable<GameModel>;
-  playerOne: Object;
-  playerTwo: Object;
+  public game: Observable<Game>;
+  playerOne: Player;
+  playerTwo: Player;
   targetscore: number;
   possibleRun: number;
 
   constructor(
     public nav: NavController,
     public modal: ModalController,
-    private store: Store<AppState>,
-    private gameActions: GameActions
+    private store: Store<AppState>
   ) {
     this.game = this.store.select(state => state.game);
 
@@ -62,16 +61,9 @@ export class GamePage implements OnInit {
   }
 
   updateScore() {
-    let modal = this.modal.create(UpdateScore);
+    const player = this.playerOne.hasTurn ? this.playerOne : this.playerTwo;
+    let modal = this.modal.create(UpdateScore, { player, run: this.possibleRun});
     modal.present();
-
-    // this.store.dispatch(this.gameActions.submitInning(
-    //   {
-    //     run: Math.floor(Math.random() * 12) + 1,
-    //     foul: true
-    //   }
-    // ));
-    // this.store.dispatch(this.gameActions.switchPlayer());
   }
 
   gotoSetup() {

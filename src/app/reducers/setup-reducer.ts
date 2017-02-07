@@ -1,16 +1,16 @@
 import { Action, ActionReducer } from '@ngrx/store';
 
-import { SetupModel } from '../models';
+import { Setup } from '../models';
 import { SetupActions } from '../actions';
 
-const initialState: SetupModel = {
+const initialState: Setup = {
   playerOne: '',
   playerTwo: '',
   targetscore: 100,
   playerOneStarts: true
 };
 
-export const SetupReducer: ActionReducer<SetupModel> =  (state: SetupModel = initialState, action: Action) => {
+export const SetupReducer: ActionReducer<Setup> =  (state: Setup = initialState, action: Action) => {
   switch (action.type) {
     case SetupActions.LOAD_SETUP_SUCCESS: {
       if (action.payload) {

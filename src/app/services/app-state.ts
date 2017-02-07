@@ -1,6 +1,6 @@
-import {SetupModel, GameModel} from "../models";
+import {Setup, Game} from "../models";
 
 export interface AppState {
-  setup: SetupModel,
-  game: GameModel;
+  setup: Setup,
+  game: Game;
 }

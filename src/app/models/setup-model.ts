@@ -1,4 +1,4 @@
-export interface SetupModel {
+export interface Setup {
   _id?: string,
   _rev?: string,
   playerOne: string,

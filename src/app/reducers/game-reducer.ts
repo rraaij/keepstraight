@@ -1,16 +1,16 @@
 import { Action, ActionReducer } from '@ngrx/store';
 
-import { GameModel } from '../models';
+import { Game } from '../models';
 import { GameActions } from '../actions';
 import {Inning} from "../models/game-model";
 
-const initialState: GameModel = {
+const initialState: Game = {
   playerOne: { name: '', hasTurn: true },
   playerTwo: { name: '', hasTurn: false },
   targetscore: 100
 };
 
-export const GameReducer: ActionReducer<GameModel> =  (state: GameModel = initialState, action: Action) => {
+export const GameReducer: ActionReducer<Game> =  (state: Game = initialState, action: Action) => {
   switch (action.type) {
     case GameActions.NEW_GAME: {
       return action.payload;

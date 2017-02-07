@@ -25,10 +25,10 @@
     <button ion-button outline item-left
             [ngClass]="{true: button, false: outline}[playerOneStarts]"
             (click)="selectStartingPlayer(1)">
-      <ion-icon name="checkmark-circle" *ngIf="playerOneStarts"></ion-icon> Player 1 starts</button>
+      <ion-icon margin-right name="checkmark-circle" *ngIf="playerOneStarts"></ion-icon> Player 1 starts</button>
     <button ion-button outline item-right
             [ngClass]="{true: 'button', false: 'button-outline'}[!playerOneStarts]"
             (click)="selectStartingPlayer(2)">
-      <ion-icon name="checkmark-circle" *ngIf="!playerOneStarts"></ion-icon> Player 2 starts</button>
+      <ion-icon margin-right name="checkmark-circle" *ngIf="!playerOneStarts"></ion-icon> Player 2 starts</button>
   </ion-item>
 </ion-list>

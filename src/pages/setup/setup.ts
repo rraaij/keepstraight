@@ -4,9 +4,9 @@ import { Observable } from 'rxjs/rx';
 import { NavController, ActionSheetController } from 'ionic-angular';
 
 import { GamePage } from '../game/game';
-import { SetupModel } from '../../app/models';
+import { Setup } from '../../app/models';
 import { AppState } from '../../app/services/app-state';
-import { GameModel } from "../../app/models/game-model";
+import { Game } from "../../app/models/game-model";
 import {GameActions} from "../../app/actions/game-actions";
 
 @Component({
@@ -15,8 +15,8 @@ import {GameActions} from "../../app/actions/game-actions";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SetupPage implements OnInit {
-  public setup: Observable<SetupModel>;
-  setupData: SetupModel;
+  public setup: Observable<Setup>;
+  setupData: Setup;
 
   constructor(
     public nav: NavController,
@@ -74,8 +74,8 @@ export class SetupPage implements OnInit {
     }
   }
 
-  private newGame(setup: SetupModel) {
-    let game: GameModel = {
+  private newGame(setup: Setup) {
+    let game: Game = {
       playerOne: { name: setup.playerOne, hasTurn: setup.playerOneStarts, innings: [] },
       playerTwo: { name: setup.playerTwo, hasTurn: !setup.playerOneStarts, innings: [] },
       targetscore: setup.targetscore
