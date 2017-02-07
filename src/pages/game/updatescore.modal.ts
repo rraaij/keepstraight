@@ -14,7 +14,7 @@ import {Player} from "../../app/models/game-model";
 })
 export class UpdateScore {
   player: Player;
-  run: number;
+  max: number;
   balls: number = 2;
   foul: boolean = false;
 
@@ -23,7 +23,7 @@ export class UpdateScore {
               public viewCtrl: ViewController
   ) {
     this.player = params.get('player');
-    this.run = params.get('run');
+    this.max = Math.min(params.get('run'), 15);
   }
 
   dismiss() {

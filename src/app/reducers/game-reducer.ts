@@ -26,7 +26,7 @@ export const GameReducer: ActionReducer<Game> =  (state: Game = initialState, ac
         inning: lastInning.inning + 1,
         run: action.payload.inning.run,
         foul: action.payload.inning.foul,
-        score: lastInning.score + action.payload.inning.run
+        score: lastInning.score + action.payload.inning.run - (action.payload.inning.foul ? 1 : 0)
       }
       innings.push(inning);
       return state;

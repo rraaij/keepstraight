@@ -36,6 +36,8 @@ export class GamePage implements OnInit {
   ngOnInit() {
     this.game.subscribe(
       gamedata => {
+        // This ChangeDetectorRef stuff needs to be here so the
+        // controls on screen will be updated when data changes.
         this.ref.markForCheck();
         setInterval(() => {
           this.ref.markForCheck();
@@ -77,12 +79,13 @@ export class GamePage implements OnInit {
       if (data) {
         this.store.dispatch(this.gameActions.submitInning(
           {
-            run: this.possibleRun - data.balls - (data.foul ? 1 : 0),
+            run: this.possibleRun - data.balls,
             foul: data.foul
           }
         ));
         this.store.dispatch(this.gameActions.switchPlayer());
       }
+      this.possibleRun = data.balls;
     });
 
     modal.present();

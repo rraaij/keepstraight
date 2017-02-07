@@ -6,6 +6,18 @@ For PouchDB, add SQLlite plugin in Cordova:
 
 TODO:
 
-[] split setup object and game object
+[X] split setup object and game object
+
+[] check if either player has won yet (reached target)
+
+[] add score correction modal
+
+[] count fouls to three, maybe warning?
+
+[] split objects that are saved to PouchDB
+
+[] add gamedata persistence to PouchDB
+
+[] use Firebase instead of PouchDB
 
 [] add jest for unit testing

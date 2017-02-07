@@ -32,6 +32,8 @@ export class SetupPage implements OnInit {
   ngOnInit() {
     this.setup.subscribe(
       gamedata => {
+        // This ChangeDetectorRef stuff needs to be here so the
+        // controls on screen will be updated when data changes.
         this.ref.markForCheck();
         setInterval(() => {
           this.ref.markForCheck();
