@@ -1,6 +1,7 @@
 import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
 import { Store } from '@ngrx/store';
-import { NavController } from 'ionic-angular';
+import { NavController, ModalController } from 'ionic-angular';
+import { UpdateScore } from './updatescore.modal';
 import { GameModel } from '../../app/models';
 import { AppState } from '../../app/services/app-state';
 import { Observable } from 'rxjs/rx';
@@ -20,6 +21,7 @@ export class GamePage implements OnInit {
 
   constructor(
     public nav: NavController,
+    public modal: ModalController,
     private store: Store<AppState>,
     private gameActions: GameActions
   ) {
@@ -60,13 +62,16 @@ export class GamePage implements OnInit {
   }
 
   updateScore() {
-    this.store.dispatch(this.gameActions.submitInning(
-      {
-        run: Math.floor(Math.random() * 12) + 1,
-        foul: true
-      }
-    ));
-    this.store.dispatch(this.gameActions.switchPlayer());
+    let modal = this.modal.create(UpdateScore);
+    modal.present();
+
+    // this.store.dispatch(this.gameActions.submitInning(
+    //   {
+    //     run: Math.floor(Math.random() * 12) + 1,
+    //     foul: true
+    //   }
+    // ));
+    // this.store.dispatch(this.gameActions.switchPlayer());
   }
 
   gotoSetup() {
