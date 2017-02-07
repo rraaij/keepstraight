@@ -2,17 +2,25 @@
   <ion-navbar>
     <ion-title>GAME TO {{ targetscore }}</ion-title>
 
-    <ion-buttons end>
-      <button ion-button (click)="gotoSetup()">Setup</button>
-      <button ion-button (click)="showCorrectionModel()">
-        <ion-icon name="options"></ion-icon>
-      </button>
-    </ion-buttons>
+    <!--<ion-buttons end>-->
+      <!--<button ion-button (click)="gotoSetup()">Setup</button>-->
+      <!--<button ion-button (click)="showCorrectionModel()">-->
+        <!--<ion-icon name="options"></ion-icon>-->
+      <!--</button>-->
+    <!--</ion-buttons>-->
   </ion-navbar>
 </ion-header>
 
 <ion-content>
-  <ion-grid>
+  <ion-fab edge right top>
+    <button ion-fab mini color="dark"><ion-icon name="arrow-dropdown"></ion-icon></button>
+    <ion-fab-list side="down">
+      <button ion-fab color="primary" (click)="gotoSetup()">Setup</button>
+      <button ion-fab color="danger" (click)="showCorrectionModel()">UNDO</button>
+    </ion-fab-list>
+  </ion-fab>
+
+  <ion-grid margin-top>
     <ion-row>
       <ion-col width-50>
         <score-table [player]="playerOne.name" [hasTurn]="playerOne.hasTurn"
@@ -25,7 +33,7 @@
       </ion-col>
     </ion-row>
   </ion-grid>
-  {{ game | async | json }}
+  <!--{{ game | async | json }}-->
 </ion-content>
 
 <ion-footer>
@@ -53,7 +61,8 @@
     </ion-row>
   </ion-grid>
   <ion-toolbar>
-    <button ion-button block (click)="rerack()">RERACK</button>
+    <button ion-button block outline icon-left color="primary" (click)="rerack()">
+      <ion-icon name="refresh"></ion-icon>RERACK</button>
     <button ion-button block (click)="updateScore()">UPDATE</button>
   </ion-toolbar>
 </ion-footer>

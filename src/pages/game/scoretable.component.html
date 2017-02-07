@@ -1,5 +1,5 @@
 <ion-card [ngClass]="{true: 'table-active', false: 'table-inactive'}[hasTurn]" (click)="toggleTurn($event)">
-  <ion-card-title class="scoretable-playername">
+  <ion-card-title no-margin class="scoretable-playername">
     {{ player }}
   </ion-card-title>
 
@@ -32,10 +32,11 @@
           <p>{{ inning.run }}</p>
         </ion-col>
         <ion-col width-25>
-          <ion-checkbox disabled="true" color="dark" checked={{inning.foul}}></ion-checkbox>
+          <!--<ion-checkbox disabled="true" color="dark" checked={{inning.foul}}></ion-checkbox>-->
+          <ion-badge *ngIf="inning.foul" color="dark">1</ion-badge>
         </ion-col>
-        <ion-col width-25>
-          <p>{{ inning.score }}</p>
+        <ion-col width-25 text-right text-nowrap>
+          <b>{{ inning.score }}</b>
         </ion-col>
       </ion-row>
     </ion-grid>

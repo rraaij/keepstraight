@@ -8,7 +8,6 @@ import { SetupModel } from '../../app/models/setup-model';
     .score {
         font-size: xx-large;
         font-weight: bold;
-        text-align: center;
         color: #387ef5;
     }
   `]
