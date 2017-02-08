@@ -1,7 +1,7 @@
 import {ChangeDetectionStrategy, Component, OnInit, ChangeDetectorRef} from '@angular/core';
 import { Store } from '@ngrx/store';
 import { NavController, ModalController } from 'ionic-angular';
-import { UpdateScore } from './updatescore.modal';
+import { UpdateScore } from './components/updatescore.modal';
 import { Game } from '../../app/models';
 import { AppState } from '../../app/services/app-state';
 import { Observable } from 'rxjs/rx';
