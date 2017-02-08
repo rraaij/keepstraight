@@ -1,0 +1,68 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>GAME TO {{ targetscore }}</ion-title>
+
+    <!--<ion-buttons end>-->
+      <!--<button ion-button (click)="gotoSetup()">Setup</button>-->
+      <!--<button ion-button (click)="showCorrectionModel()">-->
+        <!--<ion-icon name="options"></ion-icon>-->
+      <!--</button>-->
+    <!--</ion-buttons>-->
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-fab edge right top>
+    <button ion-fab mini color="dark"><ion-icon name="arrow-dropdown"></ion-icon></button>
+    <ion-fab-list side="down">
+      <button ion-fab color="primary" (click)="gotoSetup()">Setup</button>
+      <button ion-fab color="danger" (click)="showCorrectionModel()">UNDO</button>
+    </ion-fab-list>
+  </ion-fab>
+
+  <ion-grid margin-top>
+    <ion-row>
+      <ion-col width-50>
+        <score-table [player]="playerOne.name" [hasTurn]="playerOne.hasTurn"
+                     [innings]="playerOne.innings"></score-table>
+      </ion-col>
+
+      <ion-col width-50>
+        <score-table [player]="playerTwo.name"  [hasTurn]="playerTwo.hasTurn"
+                     [innings]="playerTwo.innings"></score-table>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <!--{{ game | async | json }}-->
+</ion-content>
+
+<ion-footer>
+  <ion-grid>
+    <ion-row>
+      <ion-col width-50>
+        <ion-card class="score-container">
+          <b class="title">Score:</b>
+          <b class="number">{{ getCurrentScore('One') }}</b>
+        </ion-card>
+      </ion-col>
+
+      <ion-col width-50>
+        <ion-card class="score-container">
+          <b class="title">Score:</b>
+          <b class="number">{{ getCurrentScore('Two') }}</b>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <div class="possible-run">
+        <b class="title">Possible Run:</b>
+        <b class="number">{{ possibleRun }}</b>
+      </div>
+    </ion-row>
+  </ion-grid>
+  <ion-toolbar>
+    <button ion-button block outline icon-left color="primary" (click)="rerack()">
+      <ion-icon name="refresh"></ion-icon>RERACK</button>
+    <button ion-button block (click)="updateScore()">UPDATE</button>
+  </ion-toolbar>
+</ion-footer>
