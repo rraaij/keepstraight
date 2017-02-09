@@ -32,14 +32,14 @@
 <ion-footer>
   <ion-grid>
     <ion-row>
-      <ion-col width-50>
+      <ion-col width-50 no-padding>
         <ion-card class="score-container" [ngClass]="{true: 'score-winner', false: 'score-loser'}[playerOne.hasWon]">
           <b class="title">Score:</b>
           <b class="number">{{ getCurrentScore('One') }}</b>
         </ion-card>
       </ion-col>
 
-      <ion-col width-50>
+      <ion-col width-50 no-padding>
         <ion-card class="score-container" [ngClass]="{true: 'score-winner', false: 'score-loser'}[playerTwo.hasWon]">
           <b class="title">Score:</b>
           <b class="number">{{ getCurrentScore('Two') }}</b>

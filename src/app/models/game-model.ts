@@ -3,7 +3,8 @@ export interface Game {
   _rev?: string,
   playerOne: Player,
   playerTwo: Player,
-  targetscore: number
+  targetscore: number,
+  possibleRun: number
 }
 
 export interface Player {

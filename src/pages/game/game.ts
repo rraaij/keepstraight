@@ -28,9 +28,6 @@ export class GamePage implements OnInit {
     private ref: ChangeDetectorRef
   ) {
     this.game = this.store.select(state => state.game);
-
-    this.possibleRun = 15;
-
   }
 
   ngOnInit() {
@@ -47,6 +44,7 @@ export class GamePage implements OnInit {
           this.playerOne = gamedata.playerOne;
           this.playerTwo = gamedata.playerTwo;
           this.targetscore = gamedata.targetscore;
+          this.possibleRun = gamedata.possibleRun;
         }
       }
     );
@@ -68,7 +66,7 @@ export class GamePage implements OnInit {
   }
 
   rerack() {
-    this.possibleRun += 14;
+    this.store.dispatch(this.gameActions.updatePossibleRun(this.possibleRun + 14));
   }
 
   updateScore() {
@@ -85,7 +83,7 @@ export class GamePage implements OnInit {
         ));
         this.store.dispatch(this.gameActions.switchPlayer());
       }
-      this.possibleRun = data.balls;
+      this.store.dispatch(this.gameActions.updatePossibleRun(data.balls));
     });
 
     modal.present();

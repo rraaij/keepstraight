@@ -7,13 +7,18 @@ import {Inning} from "../models/game-model";
 const initialState: Game = {
   playerOne: { name: '', hasTurn: true, hasWon: false },
   playerTwo: { name: '', hasTurn: false, hasWon: false },
-  targetscore: 100
+  targetscore: 100,
+  possibleRun: 15
 };
 
 export const GameReducer: ActionReducer<Game> =  (state: Game = initialState, action: Action) => {
   switch (action.type) {
     case GameActions.NEW_GAME: {
       return action.payload;
+    }
+
+    case GameActions.UPDATE_POSSIBLE_RUN: {
+      return { ...state, possibleRun: action.payload.value }
     }
 
     case GameActions.SUBMIT_INNING: {
