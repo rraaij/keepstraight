@@ -1,13 +1,18 @@
 .table-active {
   border: 3px solid #387ef5;
 }
+.title-winner {
+  background-color: red;
+}
+.title-loser {
+  background-color: #387ef5;
+}
 
 .table-inactive {
   border: none;
 }
 
 .scoretable-playername {
-  background-color: #387ef5;
   color: white;
   font-weight: bold;
   text-align: center;

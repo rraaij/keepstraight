@@ -19,6 +19,7 @@ export class GamePage implements OnInit {
   playerTwo: Player;
   targetscore: number;
   possibleRun: number;
+  winner: string;
 
   constructor(
     public nav: NavController,
@@ -60,6 +61,10 @@ export class GamePage implements OnInit {
         total += inning.run;
       })
     }
+
+    // determine if there is a winner yet
+    this.winner = this.playerOne.hasWon ? 'One' : (this.playerTwo.hasWon ? 'Two' : undefined);
+
     return total;
   }
 
