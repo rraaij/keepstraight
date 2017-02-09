@@ -33,14 +33,14 @@
   <ion-grid>
     <ion-row>
       <ion-col width-50>
-        <ion-card class="score-container" [ngClass]="{true: 'score-winner', false: 'score-loser'}[winner==='One']">
+        <ion-card class="score-container" [ngClass]="{true: 'score-winner', false: 'score-loser'}[playerOne.hasWon]">
           <b class="title">Score:</b>
           <b class="number">{{ getCurrentScore('One') }}</b>
         </ion-card>
       </ion-col>
 
       <ion-col width-50>
-        <ion-card class="score-container" [ngClass]="{true: 'score-winner', false: 'score-loser'}[winner==='Two']">
+        <ion-card class="score-container" [ngClass]="{true: 'score-winner', false: 'score-loser'}[playerTwo.hasWon]">
           <b class="title">Score:</b>
           <b class="number">{{ getCurrentScore('Two') }}</b>
         </ion-card>
@@ -55,7 +55,7 @@
   </ion-grid>
 
   <ion-toolbar>
-    <ion-grid *ngIf="!winner">
+    <ion-grid *ngIf="!playerOne.hasWon && !playerTwo.hasWon">
       <ion-row>
         <ion-col width-50>
           <button ion-button block outline icon-left color="primary" (click)="rerack()">
@@ -66,7 +66,7 @@
         </ion-col>
       </ion-row>
     </ion-grid>
-    <div *ngIf="winner">
+    <div *ngIf="playerOne.hasWon || playerTwo.hasWon">
       <button ion-button block icon-left color="primary" (click)="gotoSetup()">
         <ion-icon name="backspace"></ion-icon>FINISH GAME
       </button>

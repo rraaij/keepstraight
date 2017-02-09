@@ -18,11 +18,7 @@ export class ScoreTable {
   constructor(
     private store: Store<AppState>,
     private gameActions: GameActions
-  ) {
-    if(this.hasWon) {
-      console.log('I HAVE WON');
-    }
-  }
+  ) {}
 
   toggleTurn(event) {
     if(!this.hasTurn) {
