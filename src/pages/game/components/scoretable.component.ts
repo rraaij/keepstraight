@@ -1,8 +1,8 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Observable } from 'rxjs/rx';
-import {AppState} from "../../../app/services/app-state";
-import {Store} from "@ngrx/store";
-import {GameActions} from "../../../app/actions/game-actions";
+import { AppState } from "../../../app/services/app-state";
+import { Store } from "@ngrx/store";
+import { GameActions } from "../../../app/actions/game-actions";
 
 @Component({
   selector: 'score-table',
@@ -15,14 +15,16 @@ export class ScoreTable {
   @Input() hasWon: boolean;
   total: number = 0;
 
+  @Output() onTableClicked: EventEmitter<boolean>;
+
   constructor(
     private store: Store<AppState>,
     private gameActions: GameActions
-  ) {}
+  ) {
+    this.onTableClicked = new EventEmitter<boolean>();
+  }
 
   toggleTurn(event) {
-    if(!this.hasTurn) {
-      this.store.dispatch(this.gameActions.switchPlayer());
-    }
+    this.onTableClicked.emit(this.hasTurn);
   }
 }

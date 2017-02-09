@@ -50,6 +50,12 @@ export class GamePage implements OnInit {
     );
   }
 
+  togglePlayerTurn(hasTurn) {
+    if(!hasTurn) {
+      this.store.dispatch(this.gameActions.switchPlayer());
+    }
+  }
+
   getCurrentScore(player) {
     let total = 0;
     const innings = this[`player${player}`].innings;
