@@ -9,6 +9,7 @@ export interface Game {
 export interface Player {
   name: string,
   hasTurn: boolean,
+  hasWon?: boolean,
   innings?: Array<Inning>
 }
 

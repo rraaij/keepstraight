@@ -1,13 +1,6 @@
 <ion-header>
   <ion-navbar>
     <ion-title>GAME TO {{ targetscore }}</ion-title>
-
-    <!--<ion-buttons end>-->
-      <!--<button ion-button (click)="gotoSetup()">Setup</button>-->
-      <!--<button ion-button (click)="showCorrectionModel()">-->
-        <!--<ion-icon name="options"></ion-icon>-->
-      <!--</button>-->
-    <!--</ion-buttons>-->
   </ion-navbar>
 </ion-header>
 
@@ -23,12 +16,12 @@
   <ion-grid margin-top>
     <ion-row>
       <ion-col width-50>
-        <score-table [player]="playerOne.name" [hasTurn]="playerOne.hasTurn"
+        <score-table [player]="playerOne.name" [hasTurn]="playerOne.hasTurn" [hasWon]="playerOne.hasWon"
                      [innings]="playerOne.innings"></score-table>
       </ion-col>
 
       <ion-col width-50>
-        <score-table [player]="playerTwo.name"  [hasTurn]="playerTwo.hasTurn"
+        <score-table [player]="playerTwo.name" [hasTurn]="playerTwo.hasTurn" [hasWon]="playerTwo.hasWon"
                      [innings]="playerTwo.innings"></score-table>
       </ion-col>
     </ion-row>
@@ -40,14 +33,14 @@
   <ion-grid>
     <ion-row>
       <ion-col width-50>
-        <ion-card class="score-container">
+        <ion-card class="score-container" [ngClass]="{true: 'score-winner', false: 'score-loser'}[playerOne.hasWon]">
           <b class="title">Score:</b>
           <b class="number">{{ getCurrentScore('One') }}</b>
         </ion-card>
       </ion-col>
 
       <ion-col width-50>
-        <ion-card class="score-container">
+        <ion-card class="score-container" [ngClass]="{true: 'score-winner', false: 'score-loser'}[playerTwo.hasWon]">
           <b class="title">Score:</b>
           <b class="number">{{ getCurrentScore('Two') }}</b>
         </ion-card>
@@ -60,9 +53,23 @@
       </div>
     </ion-row>
   </ion-grid>
+
   <ion-toolbar>
-    <button ion-button block outline icon-left color="primary" (click)="rerack()">
-      <ion-icon name="refresh"></ion-icon>RERACK</button>
-    <button ion-button block (click)="updateScore()">UPDATE</button>
+    <ion-grid *ngIf="!playerOne.hasWon && !playerTwo.hasWon">
+      <ion-row>
+        <ion-col width-50>
+          <button ion-button block outline icon-left color="primary" (click)="rerack()">
+            <ion-icon name="refresh"></ion-icon>RERACK</button>
+        </ion-col>
+        <ion-col width-50>
+          <button ion-button block (click)="updateScore()">UPDATE</button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <div *ngIf="playerOne.hasWon || playerTwo.hasWon">
+      <button ion-button block icon-left color="primary" (click)="gotoSetup()">
+        <ion-icon name="backspace"></ion-icon>FINISH GAME
+      </button>
+    </div>
   </ion-toolbar>
 </ion-footer>

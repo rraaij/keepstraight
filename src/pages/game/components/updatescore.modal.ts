@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Platform, NavParams, ViewController } from 'ionic-angular';
-import {Player} from "../../app/models/game-model";
+import {Player} from "../../../app/models/game-model";
 
 @Component({
   templateUrl: 'updatescore.modal.html',

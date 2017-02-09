@@ -1,5 +1,5 @@
 import {Component, OnChanges, SimpleChanges, Input, Output, EventEmitter} from '@angular/core';
-import { Setup } from '../../app/models/setup-model';
+import { Setup } from '../../../app/models/setup-model';
 
 @Component({
   selector: 'setup-controls',

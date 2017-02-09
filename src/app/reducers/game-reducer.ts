@@ -5,8 +5,8 @@ import { GameActions } from '../actions';
 import {Inning} from "../models/game-model";
 
 const initialState: Game = {
-  playerOne: { name: '', hasTurn: true },
-  playerTwo: { name: '', hasTurn: false },
+  playerOne: { name: '', hasTurn: true, hasWon: false },
+  playerTwo: { name: '', hasTurn: false, hasWon: false },
   targetscore: 100
 };
 
@@ -20,15 +20,20 @@ export const GameReducer: ActionReducer<Game> =  (state: Game = initialState, ac
       const player = state.playerOne.hasTurn ? 'One' : 'Two';
       let innings = state[`player${player}`].innings;
       const lastInning = innings.length > 0 ? innings[innings.length-1] : { inning: 0, score: 0 };
+      const score = lastInning.score + action.payload.inning.run - (action.payload.inning.foul ? 1 : 0);
 
-        // TODO: SubmitInning here!
+      // Submit the actual inning
       let inning: Inning = {
         inning: lastInning.inning + 1,
         run: action.payload.inning.run,
         foul: action.payload.inning.foul,
-        score: lastInning.score + action.payload.inning.run - (action.payload.inning.foul ? 1 : 0)
+        score: score
       }
       innings.push(inning);
+
+      // Determine if this player has won the game yet
+      state[`player${player}`].hasWon = score >= state.targetscore;
+
       return state;
     }
 
