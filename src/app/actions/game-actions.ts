@@ -12,7 +12,15 @@ export class GameActions {
     return {
       type: GameActions.NEW_GAME,
       payload: game
-    };
+    }
+  }
+
+  static UPDATE_POSSIBLE_RUN = '[GAME] Update Possible Run';
+  updatePossibleRun(value: number): Action {
+    return {
+      type: GameActions.UPDATE_POSSIBLE_RUN,
+      payload: { value }
+    }
   }
 
   static SUBMIT_INNING = '[GAME] Submit Inning';
@@ -20,6 +28,14 @@ export class GameActions {
     return {
       type: GameActions.SUBMIT_INNING,
       payload: { inning }
+    }
+  }
+
+  static UPDATE_FOULS = '[GAME] Update Consecutive Fouls';
+  updateConsecutiveFouls(foul: Object) {
+    return {
+      type: GameActions.UPDATE_FOULS,
+      payload: { foul }
     }
   }
 

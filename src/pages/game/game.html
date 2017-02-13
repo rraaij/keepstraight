@@ -17,12 +17,12 @@
     <ion-row>
       <ion-col width-50>
         <score-table [player]="playerOne.name" [hasTurn]="playerOne.hasTurn" [hasWon]="playerOne.hasWon"
-                     [innings]="playerOne.innings"></score-table>
+                     [innings]="playerOne.innings" (onTableClicked)="togglePlayerTurn($event)"></score-table>
       </ion-col>
 
       <ion-col width-50>
         <score-table [player]="playerTwo.name" [hasTurn]="playerTwo.hasTurn" [hasWon]="playerTwo.hasWon"
-                     [innings]="playerTwo.innings"></score-table>
+                     [innings]="playerTwo.innings" (onTableClicked)="togglePlayerTurn($event)"></score-table>
       </ion-col>
     </ion-row>
   </ion-grid>
@@ -32,20 +32,28 @@
 <ion-footer>
   <ion-grid>
     <ion-row>
-      <ion-col width-50>
-        <ion-card class="score-container" [ngClass]="{true: 'score-winner', false: 'score-loser'}[playerOne.hasWon]">
-          <b class="title">Score:</b>
+      <ion-col width-50 no-padding (click)="togglePlayerTurn(playerOne.hasTurn)"
+               [ngClass]="{true: 'score-winner', false: 'score-loser'}[playerOne.hasWon]">
+        <ion-card class="score-container"
+                  [ngClass]="{true: 'col-active', false: 'col-inactive'}[playerOne.hasTurn]">
+          <ion-badge margin-right color="dark" *ngIf="playerOne.consecutiveFouls > 0">
+            {{playerOne.consecutiveFouls}}
+          </ion-badge>
           <b class="number">{{ getCurrentScore('One') }}</b>
         </ion-card>
       </ion-col>
-
-      <ion-col width-50>
-        <ion-card class="score-container" [ngClass]="{true: 'score-winner', false: 'score-loser'}[playerTwo.hasWon]">
-          <b class="title">Score:</b>
+      <ion-col width-50 no-padding (click)="togglePlayerTurn(playerTwo.hasTurn)"
+               [ngClass]="{true: 'score-winner', false: 'score-loser'}[playerTwo.hasWon]">
+        <ion-card class="score-container"
+                  [ngClass]="{true: 'col-active', false: 'col-inactive'}[playerTwo.hasTurn]">
+          <ion-badge margin-right color="dark" *ngIf="playerTwo.consecutiveFouls > 0">
+            {{playerTwo.consecutiveFouls}}
+          </ion-badge>
           <b class="number">{{ getCurrentScore('Two') }}</b>
         </ion-card>
       </ion-col>
     </ion-row>
+
     <ion-row>
       <div class="possible-run">
         <b class="title">Possible Run:</b>

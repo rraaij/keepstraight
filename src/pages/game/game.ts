@@ -28,9 +28,6 @@ export class GamePage implements OnInit {
     private ref: ChangeDetectorRef
   ) {
     this.game = this.store.select(state => state.game);
-
-    this.possibleRun = 15;
-
   }
 
   ngOnInit() {
@@ -47,9 +44,25 @@ export class GamePage implements OnInit {
           this.playerOne = gamedata.playerOne;
           this.playerTwo = gamedata.playerTwo;
           this.targetscore = gamedata.targetscore;
+          this.possibleRun = gamedata.possibleRun;
         }
       }
     );
+  }
+
+  togglePlayerTurn(hasTurn) {
+    if(!hasTurn) {
+      this.store.dispatch(this.gameActions.submitInning(
+        {
+          run: 0,
+          foul: false
+        }
+      ));
+      // Switching player turn like this indicates that no score and no foul was made
+      // so the consecutive fouls, if any, should be back to 0.
+      this.store.dispatch(this.gameActions.updateConsecutiveFouls(false));
+      this.store.dispatch(this.gameActions.switchPlayer());
+    }
   }
 
   getCurrentScore(player) {
@@ -58,6 +71,7 @@ export class GamePage implements OnInit {
     if (innings.length > 0) {
       innings.map(inning => {
         total += inning.run;
+        if (inning.foul) total --;
       })
     }
     return total;
@@ -68,7 +82,7 @@ export class GamePage implements OnInit {
   }
 
   rerack() {
-    this.possibleRun += 14;
+    this.store.dispatch(this.gameActions.updatePossibleRun(this.possibleRun + 14));
   }
 
   updateScore() {
@@ -77,17 +91,18 @@ export class GamePage implements OnInit {
 
     modal.onDidDismiss(data => {
       if (data) {
-        this.store.dispatch(this.gameActions.submitInning(
-          {
+        this.store.dispatch(this.gameActions.submitInning({
             run: this.possibleRun - data.balls,
             foul: data.foul
-          }
-        ));
+          }));
+        this.store.dispatch(this.gameActions.updateConsecutiveFouls({
+          foul: data.foul,
+          thirdFoul: data.thirdFoul
+        }));
         this.store.dispatch(this.gameActions.switchPlayer());
+        this.store.dispatch(this.gameActions.updatePossibleRun(data.balls));
       }
-      this.possibleRun = data.balls;
     });
-
     modal.present();
   }
 

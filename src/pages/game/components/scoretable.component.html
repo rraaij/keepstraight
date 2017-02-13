@@ -1,10 +1,10 @@
-<ion-card [ngClass]="{true: 'table-active', false: 'table-inactive'}[hasTurn]" (click)="toggleTurn($event)">
+<ion-card no-margin [ngClass]="{true: 'table-active', false: 'table-inactive'}[hasTurn]" (click)="toggleTurn($event)">
   <ion-card-title no-margin class="scoretable-playername"
                   [ngClass]="{true: 'title-winner', false: 'title-loser'}[hasWon]">
     {{ player }}
   </ion-card-title>
 
-  <ion-card-header>
+  <ion-card-header no-padding>
     <ion-grid>
       <ion-row>
         <ion-col width-15>
@@ -23,7 +23,7 @@
     </ion-grid>
   </ion-card-header>
 
-  <ion-card-content>
+  <ion-card-content no-padding>
     <ion-grid>
       <ion-row *ngFor="let inning of innings">
         <ion-col width-15>
