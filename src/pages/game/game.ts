@@ -52,6 +52,15 @@ export class GamePage implements OnInit {
 
   togglePlayerTurn(hasTurn) {
     if(!hasTurn) {
+      this.store.dispatch(this.gameActions.submitInning(
+        {
+          run: 0,
+          foul: false
+        }
+      ));
+      // Switching player turn like this indicates that no score and no foul was made
+      // so the consecutive fouls, if any, should be back to 0.
+      this.store.dispatch(this.gameActions.updateConsecutiveFouls(false));
       this.store.dispatch(this.gameActions.switchPlayer());
     }
   }
@@ -62,6 +71,7 @@ export class GamePage implements OnInit {
     if (innings.length > 0) {
       innings.map(inning => {
         total += inning.run;
+        if (inning.foul) total --;
       })
     }
     return total;
@@ -81,12 +91,14 @@ export class GamePage implements OnInit {
 
     modal.onDidDismiss(data => {
       if (data) {
-        this.store.dispatch(this.gameActions.submitInning(
-          {
+        this.store.dispatch(this.gameActions.submitInning({
             run: this.possibleRun - data.balls,
             foul: data.foul
-          }
-        ));
+          }));
+        this.store.dispatch(this.gameActions.updateConsecutiveFouls({
+          foul: data.foul,
+          thirdFoul: data.thirdFoul
+        }));
         this.store.dispatch(this.gameActions.switchPlayer());
         this.store.dispatch(this.gameActions.updatePossibleRun(data.balls));
       }

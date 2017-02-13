@@ -11,6 +11,21 @@ const initialState: Game = {
   possibleRun: 15
 };
 
+const submitInning = (innings, inning): number => {
+  const lastInning = innings.length > 0 ? innings[innings.length-1] : { inning: 0, score: 0 };
+  const score = lastInning.score + inning.run - (inning.foul ? 1 : 0);
+
+  // Submit the actual inning
+  let newInning: Inning = {
+    inning: lastInning.inning + 1,
+    run: inning.run,
+    foul: inning.foul,
+    score: score
+  }
+  innings.push(newInning);
+  return score;
+}
+
 export const GameReducer: ActionReducer<Game> =  (state: Game = initialState, action: Action) => {
   switch (action.type) {
     case GameActions.NEW_GAME: {
@@ -24,24 +39,27 @@ export const GameReducer: ActionReducer<Game> =  (state: Game = initialState, ac
     case GameActions.SUBMIT_INNING: {
       const player = state.playerOne.hasTurn ? 'One' : 'Two';
       let innings = state[`player${player}`].innings;
-      const lastInning = innings.length > 0 ? innings[innings.length-1] : { inning: 0, score: 0 };
-      const score = lastInning.score + action.payload.inning.run - (action.payload.inning.foul ? 1 : 0);
 
-      // Submit the actual inning
-      let inning: Inning = {
-        inning: lastInning.inning + 1,
-        run: action.payload.inning.run,
-        foul: action.payload.inning.foul,
-        score: score
-      }
-      innings.push(inning);
+      let score = submitInning(innings, action.payload.inning);
 
       // Determine if this player has won the game yet
       state[`player${player}`].hasWon = score >= state.targetscore;
 
+      return state;
+    }
+
+    case GameActions.UPDATE_FOULS: {
+      const player = state.playerOne.hasTurn ? 'One' : 'Two';
+
       // Update the number of consecutive fouls for this player
-      if (action.payload.inning.foul) {
-        state[`player${player}`].consecutiveFouls ++;
+      if (action.payload.foul.foul) {
+        if(action.payload.foul.thirdFoul) {
+          let innings = state[`player${player}`].innings;
+          submitInning(innings, { run: -15, foul: false });
+          state[`player${player}`].consecutiveFouls = 0;
+        } else {
+          state[`player${player}`].consecutiveFouls ++;
+        }
       } else {
         state[`player${player}`].consecutiveFouls = 0;
       }

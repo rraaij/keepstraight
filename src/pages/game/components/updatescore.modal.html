@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>UPDATE SCORE FOR {{ player.name }}</ion-title>
+    <ion-title>UPDATE SCORE</ion-title>
     <ion-buttons end>
       <button ion-button icon-only (click)="dismiss()">
         <ion-icon name="close-circle"></ion-icon>
@@ -12,12 +12,18 @@
 <ion-content>
   <ion-list>
     <ion-item>
+      <ion-label>
+        <p text-center class="blue-bold-center">{{ player.name }}</p>
+      </ion-label>
+    </ion-item>
+
+    <ion-item>
       <ion-label>Number of balls left on table:
-        <p text-center class="balls">{{ balls }}</p>
+        <p text-center class="blue-bold-center">{{ balls }}</p>
       </ion-label>
       <ion-range min="2" max={{max}} step="1" [(ngModel)]="balls" color="primary">
-        <ion-icon range-left color="dark" name="remove-circle"></ion-icon>
-        <ion-icon range-right color="dark" name="add-circle"></ion-icon>
+        <ion-icon range-left color="dark" name="remove-circle" (click)="updateBalls('less')"></ion-icon>
+        <ion-icon range-right color="dark" name="add-circle" (click)="updateBalls('more')"></ion-icon>
       </ion-range>
     </ion-item>
 
@@ -30,8 +36,8 @@
             </button>
           </ion-col>
           <ion-col width-50>
-            <button ion-button block [outline]="!foul" (click)="inningEndedInFoul(true)">
-              Inning ended in Foul
+            <button ion-button blSck [outline]="!foul" (click)="inningEndedInFoul(true)">
+              Ended in a Foul
             </button>
           </ion-col>
         </ion-row>
@@ -41,7 +47,10 @@
 </ion-content>
 
 <ion-footer>
-  <button ion-button full (click)="submit()">
-    <ion-icon margin-right name="checkmark-circle"></ion-icon> submit this score
-  </button>
+  <ion-toolbar>
+    <button ion-button full (click)="submit()">
+      <ion-icon margin-right name="checkmark-circle"></ion-icon>
+      Submit this Score
+    </button>
+  </ion-toolbar>
 </ion-footer>

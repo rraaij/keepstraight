@@ -31,6 +31,14 @@ export class GameActions {
     }
   }
 
+  static UPDATE_FOULS = '[GAME] Update Consecutive Fouls';
+  updateConsecutiveFouls(foul: Object) {
+    return {
+      type: GameActions.UPDATE_FOULS,
+      payload: { foul }
+    }
+  }
+
   static SWITCH_PLAYER = '[GAME] Switch Player';
   switchPlayer() {
     return {
