@@ -2,7 +2,7 @@ import { Action, ActionReducer } from '@ngrx/store';
 
 import { Game } from '../models';
 import { GameActions } from '../actions';
-import {Inning} from "../models/game-model";
+import {Inning, Player} from "../models/game-model";
 
 const initialState: Game = {
   playerOne: { name: '', hasTurn: true, consecutiveFouls: 0, hasWon: false },
@@ -11,22 +11,28 @@ const initialState: Game = {
   possibleRun: 15
 };
 
-const submitInning = (innings, inning): number => {
+const submitInning = (innings, newInning): Inning => {
   const lastInning = innings.length > 0 ? innings[innings.length-1] : { inning: 0, score: 0 };
-  const score = lastInning.score + inning.run - (inning.foul ? 1 : 0);
+  const score = lastInning.score + newInning.run - (newInning.foul ? 1 : 0);
 
   // Submit the actual inning
-  let newInning: Inning = {
+  let inning: Inning = {
     inning: lastInning.inning + 1,
-    run: inning.run,
-    foul: inning.foul,
+    run: newInning.run,
+    foul: newInning.foul,
     score: score
   }
-  innings.push(newInning);
-  return score;
+  innings.push(inning);
+  return inning;
 }
 
 export const GameReducer: ActionReducer<Game> =  (state: Game = initialState, action: Action) => {
+
+  const getPlayer = (): Player => {
+    const player = state.playerOne.hasTurn ? 'One' : 'Two';
+    return state[`player${player}`];
+  }
+
   switch (action.type) {
     case GameActions.NEW_GAME: {
       return action.payload;
@@ -37,31 +43,31 @@ export const GameReducer: ActionReducer<Game> =  (state: Game = initialState, ac
     }
 
     case GameActions.SUBMIT_INNING: {
-      const player = state.playerOne.hasTurn ? 'One' : 'Two';
-      let innings = state[`player${player}`].innings;
+      const player = getPlayer();
+      let innings = player.innings;
 
-      let score = submitInning(innings, action.payload.inning);
+      let inning = submitInning(innings, action.payload.inning);
 
       // Determine if this player has won the game yet
-      state[`player${player}`].hasWon = score >= state.targetscore;
+      player.hasWon = inning.score >= state.targetscore;
 
       return state;
     }
 
     case GameActions.UPDATE_FOULS: {
-      const player = state.playerOne.hasTurn ? 'One' : 'Two';
+      const player = getPlayer();
 
       // Update the number of consecutive fouls for this player
       if (action.payload.foul.foul) {
         if(action.payload.foul.thirdFoul) {
-          let innings = state[`player${player}`].innings;
+          let innings = player.innings;
           submitInning(innings, { run: -15, foul: false });
-          state[`player${player}`].consecutiveFouls = 0;
+          player.consecutiveFouls = 0;
         } else {
-          state[`player${player}`].consecutiveFouls ++;
+          player.consecutiveFouls ++;
         }
       } else {
-        state[`player${player}`].consecutiveFouls = 0;
+        player.consecutiveFouls = 0;
       }
       return state;
     }
