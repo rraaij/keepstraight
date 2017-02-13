@@ -88,10 +88,9 @@ export class GamePage implements OnInit {
           }
         ));
         this.store.dispatch(this.gameActions.switchPlayer());
+        this.store.dispatch(this.gameActions.updatePossibleRun(data.balls));
       }
-      this.store.dispatch(this.gameActions.updatePossibleRun(data.balls));
     });
-
     modal.present();
   }
 

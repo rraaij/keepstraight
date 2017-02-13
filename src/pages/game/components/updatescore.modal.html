@@ -15,15 +15,29 @@
       <ion-label>Number of balls left on table:
         <p text-center class="balls">{{ balls }}</p>
       </ion-label>
-      <ion-range min="2" max={{max}} step="1" snaps="true" [(ngModel)]="balls" color="primary">
+      <ion-range min="2" max={{max}} step="1" [(ngModel)]="balls" color="primary">
         <ion-icon range-left color="dark" name="remove-circle"></ion-icon>
         <ion-icon range-right color="dark" name="add-circle"></ion-icon>
       </ion-range>
     </ion-item>
 
     <ion-item>
-      <ion-label>Inning ended in Foul</ion-label>
-      <ion-toggle color="danger" checked="false" [(ngModel)]="foul"></ion-toggle>
+      <!--<ion-label>Inning ended in Foul</ion-label>-->
+      <!--<ion-toggle color="danger" checked="false" [(ngModel)]="foul"></ion-toggle>-->
+      <ion-grid no-padding>
+        <ion-row>
+          <ion-col width-50>
+            <button ion-button block [outline]="foul" (click)="inningEndedInFoul(false)">
+              No Foul
+            </button>
+          </ion-col>
+          <ion-col width-50>
+            <button ion-button block [outline]="!foul" (click)="inningEndedInFoul(true)">
+              Inning ended in Foul
+            </button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
     </ion-item>
   </ion-list>
 </ion-content>

@@ -30,6 +30,10 @@ export class UpdateScore {
     this.viewCtrl.dismiss();
   }
 
+  inningEndedInFoul(foul) {
+    this.foul = foul;
+  }
+
   submit() {
     this.viewCtrl.dismiss({ balls: this.balls, foul: this.foul });
   }
