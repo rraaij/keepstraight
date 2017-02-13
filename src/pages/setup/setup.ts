@@ -84,8 +84,20 @@ export class SetupPage implements OnInit {
 
   private newGame(setup: Setup) {
     let game: Game = {
-      playerOne: { name: setup.playerOne, hasTurn: setup.playerOneStarts, hasWon: false, innings: [] },
-      playerTwo: { name: setup.playerTwo, hasTurn: !setup.playerOneStarts, hasWon: false, innings: [] },
+      playerOne: {
+        name: setup.playerOne,
+        hasTurn: setup.playerOneStarts,
+        consecutiveFouls: 0,
+        hasWon: false,
+        innings: []
+      },
+      playerTwo: {
+        name: setup.playerTwo,
+        hasTurn: !setup.playerOneStarts,
+        consecutiveFouls: 0,
+        hasWon: false,
+        innings: []
+      },
       targetscore: setup.targetscore,
       possibleRun: 15
     };

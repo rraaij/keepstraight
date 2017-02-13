@@ -5,8 +5,8 @@ import { GameActions } from '../actions';
 import {Inning} from "../models/game-model";
 
 const initialState: Game = {
-  playerOne: { name: '', hasTurn: true, hasWon: false },
-  playerTwo: { name: '', hasTurn: false, hasWon: false },
+  playerOne: { name: '', hasTurn: true, consecutiveFouls: 0, hasWon: false },
+  playerTwo: { name: '', hasTurn: false, consecutiveFouls: 0, hasWon: false },
   targetscore: 100,
   possibleRun: 15
 };
@@ -39,6 +39,12 @@ export const GameReducer: ActionReducer<Game> =  (state: Game = initialState, ac
       // Determine if this player has won the game yet
       state[`player${player}`].hasWon = score >= state.targetscore;
 
+      // Update the number of consecutive fouls for this player
+      if (action.payload.inning.foul) {
+        state[`player${player}`].consecutiveFouls ++;
+      } else {
+        state[`player${player}`].consecutiveFouls = 0;
+      }
       return state;
     }
 
