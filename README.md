@@ -8,11 +8,11 @@ TODO:
 
 [X] split setup object and game object
 
-[] check if either player has won yet (reached target)
+[X] check if either player has won yet (reached target)
 
-[] add score correction modal
+[] add score correction modal (use swiping in table?)
 
-[] count fouls to three, maybe warning?
+[X] count fouls to three, maybe warning?
 
 [] split objects that are saved to PouchDB
 

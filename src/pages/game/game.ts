@@ -85,6 +85,11 @@ export class GamePage implements OnInit {
     this.store.dispatch(this.gameActions.updatePossibleRun(this.possibleRun + 14));
   }
 
+  removeLastInning(inning) {
+    // TODO: need an 'are ya sure'-dialog here
+    console.log('removeLastInning:', inning);
+  }
+
   updateScore() {
     const player = this.playerOne.hasTurn ? this.playerOne : this.playerTwo;
     let modal = this.modal.create(UpdateScore, { player, run: this.possibleRun});

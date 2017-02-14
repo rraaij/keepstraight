@@ -16,13 +16,15 @@
   <ion-grid margin-top>
     <ion-row>
       <ion-col width-50>
-        <score-table [player]="playerOne.name" [hasTurn]="playerOne.hasTurn" [hasWon]="playerOne.hasWon"
-                     [innings]="playerOne.innings" (onTableClicked)="togglePlayerTurn($event)"></score-table>
+        <score-table [player]="playerOne" [side]="'One'"
+                     (onTableClicked)="togglePlayerTurn($event)"
+                     (onRemoveInning)="removeLastInning($event)"></score-table>
       </ion-col>
 
       <ion-col width-50>
-        <score-table [player]="playerTwo.name" [hasTurn]="playerTwo.hasTurn" [hasWon]="playerTwo.hasWon"
-                     [innings]="playerTwo.innings" (onTableClicked)="togglePlayerTurn($event)"></score-table>
+        <score-table [player]="playerTwo" [side]="'Two'"
+                     (onTableClicked)="togglePlayerTurn($event)"
+                     (onRemoveInning)="removeLastInning($event)"></score-table>
       </ion-col>
     </ion-row>
   </ion-grid>

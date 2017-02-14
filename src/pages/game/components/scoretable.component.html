@@ -1,7 +1,7 @@
-<ion-card no-margin [ngClass]="{true: 'table-active', false: 'table-inactive'}[hasTurn]" (click)="toggleTurn($event)">
-  <ion-card-title no-margin class="scoretable-playername"
-                  [ngClass]="{true: 'title-winner', false: 'title-loser'}[hasWon]">
-    {{ player }}
+<ion-card no-margin [ngClass]="{true: 'table-active', false: 'table-inactive'}[player.hasTurn]">
+  <ion-card-title no-margin class="scoretable-playername" (click)="toggleTurn($event)"
+                  [ngClass]="{true: 'title-winner', false: 'title-loser'}[player.hasWon]">
+    {{ player.name }}
   </ion-card-title>
 
   <ion-card-header no-padding>
@@ -24,21 +24,29 @@
   </ion-card-header>
 
   <ion-card-content no-padding>
-    <ion-grid>
-      <ion-row *ngFor="let inning of innings">
-        <ion-col width-15>
-          <p>{{ inning.inning }}</p>
-        </ion-col>
-        <ion-col width-25 text-right text-nowrap>
-          <p>{{ inning.run }}</p>
-        </ion-col>
-        <ion-col width-25 text-center>
-          <ion-badge *ngIf="inning.foul" color="dark">1</ion-badge>
-        </ion-col>
-        <ion-col width-25 text-right text-nowrap>
-          <b>{{ inning.score }}</b>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
+    <ion-list *ngFor="let inning of player.innings">
+      <ion-item-sliding #item>
+        <ion-item>
+          <ion-row>
+            <ion-col width-15 no-padding>
+              {{ inning.inning }}
+            </ion-col>
+            <ion-col width-25 text-right text-nowrap no-padding>
+              {{ inning.run }}
+            </ion-col>
+            <ion-col width-25 text-center no-padding>
+              <ion-badge *ngIf="inning.foul" color="dark">1</ion-badge>
+            </ion-col>
+            <ion-col width-25 text-right text-nowrap no-padding>
+              <b>{{ inning.score }}</b>
+            </ion-col>
+          </ion-row>
+        </ion-item>
+        <ion-item-options side="right" *ngIf="isLastInning(inning)">
+          <button ion-button color="danger"
+                  (click)="removeInning(inning)"><ion-icon name="close-circle"></ion-icon></button>
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-list>
   </ion-card-content>
 </ion-card>
