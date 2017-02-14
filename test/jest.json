@@ -1,0 +1,14 @@
+{
+  "testRegex": ".+\\.spec\\.(ts|tsx|js)$",
+  "moduleFileExtensions": ["ts", "tsx", "js"],
+  "transform": {
+    "^.+\\.(ts|tsx)$": "<rootDir>/test/preprocessor.js"
+  },
+  "collectCoverage": false,
+  "collectCoverageFrom": ["src/**/*.ts", "!**/node_modules/**", "!**/dist/**"],
+  "coverageReporters": ["json"],
+  "coverageDirectory": "<rootDir>/test/coverage",
+  "moduleNameMapper": {
+    "^.+\\.(css|scss)$": "<rootDir>/test/styleMock.js"
+  }
+}
