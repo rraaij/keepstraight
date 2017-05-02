@@ -1,8 +1,14 @@
 import { NgModule, ErrorHandler } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
+import { SplashScreen } from '@ionic-native/splash-screen';
+import { StatusBar } from '@ionic-native/status-bar';
+
 import { StoreModule, combineReducers} from '@ngrx/store';
 import { EffectsModule} from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+
 import { KeepstraightApp } from './app.component';
 import { ScoreTable } from '../pages/game/components/scoretable.component';
 import { SetupControls } from '../pages/setup/components/gamesetup.component';
@@ -26,6 +32,7 @@ import { SetupEffects } from './effects/setup-effects';
     ],
     imports: [
       IonicModule.forRoot(KeepstraightApp),
+      BrowserModule,
       // 'game' and 'setup' here connect to 'game' and 'setup' in the AppState
       StoreModule.provideStore(combineReducers({
         setup: SetupReducer,
@@ -45,6 +52,8 @@ import { SetupEffects } from './effects/setup-effects';
     ],
     providers: [
       {provide: ErrorHandler, useClass: IonicErrorHandler},
+      SplashScreen,
+      StatusBar,
       actions,
       KeepstraightService
     ]

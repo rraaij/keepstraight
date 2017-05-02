@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Platform } from 'ionic-angular';
-import { StatusBar, Splashscreen } from 'ionic-native';
+import { StatusBar } from '@ionic-native/status-bar';
+import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { SetupPage } from '../pages/setup/setup';
 
@@ -12,12 +13,12 @@ import { SetupPage } from '../pages/setup/setup';
 export class KeepstraightApp {
     rootPage = SetupPage;
 
-    constructor(platform: Platform, private store: Store<any>) {
+    constructor(statusbar: StatusBar, splashscreen: SplashScreen, platform: Platform, private store: Store<any>) {
         platform.ready().then(() => {
             // Okay, so the platform is ready and our plugins are available.
             // Here you can do any higher level native things you might need.
-            StatusBar.styleDefault();
-            Splashscreen.hide();
+            statusbar.styleDefault();
+            splashscreen.hide();
         });
     }
 }
