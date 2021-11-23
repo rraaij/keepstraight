@@ -1,6 +1,7 @@
 {
   "name": "keepstraight",
-  "app_id": "",
-  "v2": true,
-  "typescript": true
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
 }
