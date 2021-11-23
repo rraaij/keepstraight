@@ -1,52 +1,17 @@
-import { NgModule, ErrorHandler } from '@angular/core';
-import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
-import { StoreModule, combineReducers} from '@ngrx/store';
-import { EffectsModule} from '@ngrx/effects';
-import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { KeepstraightApp } from './app.component';
-import { ScoreTable } from '../pages/game/components/scoretable.component';
-import { SetupControls } from '../pages/setup/components/gamesetup.component';
-import { UpdateScore } from '../pages/game/components/updatescore.modal';
-import { SetupPage } from '../pages/setup/setup';
-import { GamePage } from '../pages/game/game';
-import { SetupReducer } from './reducers/setup-reducer';
-import { GameReducer } from './reducers/game-reducer';
-import actions from './actions';
-import KeepstraightService from './services';
-import { SetupEffects } from './effects/setup-effects';
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { RouteReuseStrategy } from '@angular/router';
+
+import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
+
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
 
 @NgModule({
-    declarations: [
-      KeepstraightApp,
-      SetupPage,
-      GamePage,
-      ScoreTable,
-      SetupControls,
-      UpdateScore
-    ],
-    imports: [
-      IonicModule.forRoot(KeepstraightApp),
-      // 'game' and 'setup' here connect to 'game' and 'setup' in the AppState
-      StoreModule.provideStore(combineReducers({
-        setup: SetupReducer,
-        game: GameReducer
-      })),
-      StoreDevtoolsModule.instrumentOnlyWithExtension(),
-      EffectsModule.run(SetupEffects)
-    ],
-    bootstrap: [
-      IonicApp
-    ],
-    entryComponents: [
-      KeepstraightApp,
-      SetupPage,
-      GamePage,
-      UpdateScore
-    ],
-    providers: [
-      {provide: ErrorHandler, useClass: IonicErrorHandler},
-      actions,
-      KeepstraightService
-    ]
+  declarations: [AppComponent],
+  entryComponents: [],
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule],
+  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+  bootstrap: [AppComponent],
 })
 export class AppModule {}
