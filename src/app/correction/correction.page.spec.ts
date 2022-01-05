@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
+import { RouterModule } from '@angular/router';
+import { CorrectionPage } from './correction.page';
 
-import { ExploreContainerComponent } from './explore-container.component';
-
-describe('ExploreContainerComponent', () => {
-  let component: ExploreContainerComponent;
-  let fixture: ComponentFixture<ExploreContainerComponent>;
+describe('CorrectionPage', () => {
+  let component: CorrectionPage;
+  let fixture: ComponentFixture<CorrectionPage>;
 
   beforeEach(
     waitForAsync(() => {
       TestBed.configureTestingModule({
-        declarations: [ExploreContainerComponent],
-        imports: [IonicModule.forRoot()],
+        declarations: [CorrectionPage],
+        imports: [IonicModule.forRoot(), RouterModule.forRoot([])],
       }).compileComponents();
 
-      fixture = TestBed.createComponent(ExploreContainerComponent);
+      fixture = TestBed.createComponent(CorrectionPage);
       component = fixture.componentInstance;
       fixture.detectChanges();
     })

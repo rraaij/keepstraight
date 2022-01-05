@@ -4,19 +4,37 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'folder/Inbox',
-    pathMatch: 'full'
+    redirectTo: 'setup',
+    pathMatch: 'full',
   },
   {
-    path: 'folder/:id',
-    loadChildren: () => import('./folder/folder.module').then( m => m.FolderPageModule)
-  }
+    path: 'setup',
+    loadChildren: () =>
+      import('./setup/setup.module').then((m) => m.SetupPageModule),
+  },
+  {
+    path: 'game',
+    loadChildren: () =>
+      import('./game/game.module').then((m) => m.GamePageModule),
+  },
+  {
+    path: 'correction',
+    loadChildren: () =>
+      import('./correction/correction.module').then(
+        (m) => m.CorrectionPageModule
+      ),
+  },
+  {
+    path: 'archive',
+    loadChildren: () =>
+      import('./archive/archive.module').then((m) => m.ArchivePageModule),
+  },
 ];
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
+    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules }),
   ],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class AppRoutingModule {}
