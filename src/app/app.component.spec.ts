@@ -47,10 +47,10 @@ describe('AppComponent', () => {
       const menuItems = app.querySelectorAll('ion-item');
       expect(menuItems.length).toEqual(12);
       expect(menuItems[0].getAttribute('ng-reflect-router-link')).toEqual(
-        '/folder/Inbox'
+        '/setup/Inbox'
       );
       expect(menuItems[1].getAttribute('ng-reflect-router-link')).toEqual(
-        '/folder/Outbox'
+        '/setup/Outbox'
       );
     })
   );

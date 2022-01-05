@@ -4,13 +4,30 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'folder/Inbox',
+    redirectTo: 'setup',
     pathMatch: 'full',
   },
   {
-    path: 'folder/:id',
+    path: 'setup',
     loadChildren: () =>
-      import('./folder/folder.module').then((m) => m.FolderPageModule),
+      import('./setup/setup.module').then((m) => m.SetupPageModule),
+  },
+  {
+    path: 'game',
+    loadChildren: () =>
+      import('./game/game.module').then((m) => m.GamePageModule),
+  },
+  {
+    path: 'correction',
+    loadChildren: () =>
+      import('./correction/correction.module').then(
+        (m) => m.CorrectionPageModule
+      ),
+  },
+  {
+    path: 'archive',
+    loadChildren: () =>
+      import('./archive/archive.module').then((m) => m.ArchivePageModule),
   },
 ];
 
