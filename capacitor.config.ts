@@ -1,7 +1,7 @@
 import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'io.ionic.starter',
+  appId: 'com.rvraaij.keepstraight',
   appName: 'keepstraight',
   webDir: 'www',
   bundledWebRuntime: false
