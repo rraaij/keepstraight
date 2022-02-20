@@ -7,11 +7,7 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./setup.page.scss'],
 })
 export class SetupPage implements OnInit {
-  public setup: string;
-
   constructor(private activatedRoute: ActivatedRoute) {}
 
-  ngOnInit() {
-    this.setup = this.activatedRoute.snapshot.paramMap.get('id');
-  }
+  ngOnInit() {}
 }
