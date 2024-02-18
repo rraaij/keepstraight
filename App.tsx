@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, View, Platform } from "react-native";
 import ScoreTableHeader from "./components/ScoreTableHeader";
 import ScoreTable from "./components/ScoreTable";
 import ScoreTableFooter from "./components/ScoreTableFooter";
@@ -9,7 +9,7 @@ import { PlayerEnum } from "./lib/game.model";
 export default function App() {
   return (
     <>
-      <StatusBar style="light" />
+      <StatusBar style={Platform.OS === "ios" ? "light" : "auto"} />
       <View style={styles.container}>
         <Header />
 
