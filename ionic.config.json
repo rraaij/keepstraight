@@ -1,7 +1,0 @@
-{
-  "name": "keepstraight",
-  "integrations": {
-    "capacitor": {}
-  },
-  "type": "angular"
-}
