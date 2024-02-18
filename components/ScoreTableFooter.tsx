@@ -1,6 +1,16 @@
 import { View, Text, StyleSheet, Button } from "react-native";
+import { useState } from "react";
+import ScoreUpdater from "./ScoreUpdater";
 
 const ScoreTableFooter = () => {
+  const [scoreUpdaterVisible, setScoreUpdaterVisible] =
+    useState<boolean>(false);
+
+  const addScoreHandler = () => {
+    // handle updated score
+    setScoreUpdaterVisible(false);
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.currentScores}>
@@ -27,9 +37,16 @@ const ScoreTableFooter = () => {
         <View style={styles.actionColumn}>
           <Button
             title={"Update Score"}
-            onPress={() => console.log("UPDATE SCORE")}
+            onPress={() => setScoreUpdaterVisible(true)}
           />
         </View>
+        {scoreUpdaterVisible && (
+          <ScoreUpdater
+            visible={scoreUpdaterVisible}
+            onAddScore={addScoreHandler}
+            onCancel={() => setScoreUpdaterVisible(false)}
+          />
+        )}
       </View>
     </View>
   );

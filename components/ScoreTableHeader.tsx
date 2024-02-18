@@ -4,17 +4,16 @@ import { PlayerEnum } from "../lib/game.model";
 const ScoreTableHeader = ({ player }: { player: PlayerEnum }) => {
   return (
     <View style={styles.container}>
-      <View style={styles.player}>
-        <Text
-          style={
-            player === PlayerEnum.PLAYER_ONE
-              ? styles.selected
-              : styles.unselected
-          }
-        >
-          {player === PlayerEnum.PLAYER_ONE ? "Player One" : "Player Two"}
-        </Text>
-      </View>
+      <Text
+        style={[
+          styles.player,
+          player === PlayerEnum.PLAYER_ONE
+            ? styles.selected
+            : styles.unselected,
+        ]}
+      >
+        {player === PlayerEnum.PLAYER_ONE ? "Player One" : "Player Two"}
+      </Text>
     </View>
   );
 };

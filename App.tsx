@@ -1,3 +1,4 @@
+import { StatusBar } from "expo-status-bar";
 import { StyleSheet, View } from "react-native";
 import ScoreTableHeader from "./components/ScoreTableHeader";
 import ScoreTable from "./components/ScoreTable";
@@ -7,41 +8,43 @@ import { PlayerEnum } from "./lib/game.model";
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Header />
+    <>
+      <StatusBar style="light" />
+      <View style={styles.container}>
+        <Header />
 
-      {/*TABLE HEADERS*/}
-      <View style={styles.tableHeaders}>
-        <View style={styles.tableHeaderContainer}>
-          <ScoreTableHeader player={PlayerEnum.PLAYER_ONE} />
+        {/*TABLE HEADERS*/}
+        <View style={styles.tableHeaders}>
+          <View style={styles.tableHeaderContainer}>
+            <ScoreTableHeader player={PlayerEnum.PLAYER_ONE} />
+          </View>
+          <View style={styles.tableHeaderContainer}>
+            <ScoreTableHeader player={PlayerEnum.PLAYER_TWO} />
+          </View>
         </View>
-        <View style={styles.tableHeaderContainer}>
-          <ScoreTableHeader player={PlayerEnum.PLAYER_TWO} />
+
+        {/*TABLE CONTENTS*/}
+        <View style={styles.tableContents}>
+          <View style={styles.tableContentContainer}>
+            <ScoreTable player={PlayerEnum.PLAYER_ONE} />
+          </View>
+          <View style={styles.tableContentContainer}>
+            <ScoreTable player={PlayerEnum.PLAYER_TWO} />
+          </View>
+        </View>
+
+        {/*TABLE FOOTER*/}
+        <View style={{ marginTop: "auto" }}>
+          <ScoreTableFooter />
         </View>
       </View>
-
-      {/*TABLE CONTENTS*/}
-      <View style={styles.tableContents}>
-        <View style={styles.tableContentContainer}>
-          {/*ScoreTableContents*/}
-          <ScoreTable player={PlayerEnum.PLAYER_ONE} />
-        </View>
-        <View style={styles.tableContentContainer}>
-          {/*ScoreTableContents*/}
-          <ScoreTable player={PlayerEnum.PLAYER_TWO} />
-        </View>
-      </View>
-
-      {/*TABLE FOOTER*/}
-      <View style={{ marginTop: "auto" }}>
-        <ScoreTableFooter />
-      </View>
-    </View>
+    </>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
+    paddingTop: 40,
     flex: 1,
     flexDirection: "column",
     backgroundColor: "blue",

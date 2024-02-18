@@ -1,9 +1,11 @@
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, FlatList } from "react-native";
 import { PlayerEnum } from "../lib/game.model";
 
 const ScoreTable = ({ player }: { player: PlayerEnum }) => {
   return (
-    <View style={styles.container}>{/*use React Native scrolling table*/}</View>
+    <View style={styles.container}>
+      {/*<FlatList data={} renderItem={} />*/}
+    </View>
   );
 };
 
