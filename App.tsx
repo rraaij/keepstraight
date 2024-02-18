@@ -1,11 +1,41 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from "react-native";
+import ScoreTableHeader from "./components/ScoreTableHeader";
+import ScoreTable from "./components/ScoreTable";
+import ScoreTableFooter from "./components/ScoreTableFooter";
+import Header from "./components/Header";
+import { PlayerEnum } from "./lib/game.model";
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
+      <Header />
+
+      {/*TABLE HEADERS*/}
+      <View style={styles.tableHeaders}>
+        <View style={styles.tableHeaderContainer}>
+          <ScoreTableHeader player={PlayerEnum.PLAYER_ONE} />
+        </View>
+        <View style={styles.tableHeaderContainer}>
+          <ScoreTableHeader player={PlayerEnum.PLAYER_TWO} />
+        </View>
+      </View>
+
+      {/*TABLE CONTENTS*/}
+      <View style={styles.tableContents}>
+        <View style={styles.tableContentContainer}>
+          {/*ScoreTableContents*/}
+          <ScoreTable player={PlayerEnum.PLAYER_ONE} />
+        </View>
+        <View style={styles.tableContentContainer}>
+          {/*ScoreTableContents*/}
+          <ScoreTable player={PlayerEnum.PLAYER_TWO} />
+        </View>
+      </View>
+
+      {/*TABLE FOOTER*/}
+      <View style={{ marginTop: "auto" }}>
+        <ScoreTableFooter />
+      </View>
     </View>
   );
 }
@@ -13,8 +43,32 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    flexDirection: "column",
+    backgroundColor: "blue",
+  },
+  tableHeaders: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "space-between",
+    alignItems: "stretch",
+  },
+  tableHeaderContainer: {
+    width: "50%",
+    padding: 2,
+    borderWidth: 1,
+    borderColor: "blue",
+    flexDirection: "column",
+    justifyContent: "flex-end",
+  },
+  tableContents: {
+    flex: 1,
+    flexDirection: "row",
+    flexGrow: 1,
+    backgroundColor: "white",
+  },
+  tableContentContainer: {
+    width: "50%",
+    borderWidth: 1,
+    borderColor: "blue",
   },
 });
