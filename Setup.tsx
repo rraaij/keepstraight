@@ -1,6 +1,7 @@
-import { Button, StyleSheet, Text, TextInput, View } from "react-native";
 import { useState } from "react";
+import { Button, StyleSheet, Text, TextInput, View } from "react-native";
 import { PlayerEnum, SetupInfo } from "./lib/game.model";
+import { Colors } from "./lib/Colors";
 
 const setupInfo: SetupInfo = {
   playerOne: "Shane",
@@ -131,7 +132,7 @@ const styles = StyleSheet.create({
   },
   button: {
     borderWidth: 1,
-    borderColor: "blue",
+    borderColor: Colors.blue600,
     width: "30%",
     paddingVertical: 16,
     borderRadius: 6,
@@ -139,12 +140,12 @@ const styles = StyleSheet.create({
     marginHorizontal: 8,
   },
   selectedButton: {
-    backgroundColor: "blue",
+    backgroundColor: Colors.blue600,
     color: "white",
   },
   buttons: {
     borderTopWidth: 1,
-    borderTopColor: "blue",
+    borderTopColor: Colors.blue600,
     paddingTop: 16,
     paddingHorizontal: 3,
     flexDirection: "row",

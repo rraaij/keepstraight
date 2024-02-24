@@ -1,5 +1,6 @@
 import { StyleSheet, View, Text, Modal, Button, TextInput } from "react-native";
 import { useState } from "react";
+import { Colors } from "../lib/Colors";
 
 const ScoreUpdater = ({
   visible,
@@ -81,7 +82,7 @@ const styles = StyleSheet.create({
   },
   inputControl: {
     borderWidth: 1,
-    borderColor: "blue",
+    borderColor: Colors.blue600,
     width: "30%",
     padding: 16,
     borderRadius: 6,
@@ -90,7 +91,7 @@ const styles = StyleSheet.create({
   },
   button: {
     borderWidth: 1,
-    borderColor: "blue",
+    borderColor: Colors.blue600,
     width: "30%",
     paddingVertical: 16,
     borderRadius: 6,
@@ -98,12 +99,12 @@ const styles = StyleSheet.create({
     marginHorizontal: 8,
   },
   selectedButton: {
-    backgroundColor: "blue",
+    backgroundColor: Colors.blue600,
     color: "white",
   },
   buttons: {
     borderTopWidth: 1,
-    borderTopColor: "blue",
+    borderTopColor: Colors.blue600,
     paddingTop: 16,
     paddingHorizontal: 3,
     flexDirection: "row",

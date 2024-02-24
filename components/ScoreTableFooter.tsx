@@ -1,6 +1,7 @@
 import { View, Text, StyleSheet, Button } from "react-native";
 import { useState } from "react";
 import ScoreUpdater from "./ScoreUpdater";
+import { Colors } from "../lib/Colors";
 
 const ScoreTableFooter = () => {
   const [scoreUpdaterVisible, setScoreUpdaterVisible] =
@@ -56,7 +57,7 @@ export default ScoreTableFooter;
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "blue",
+    backgroundColor: Colors.blue600,
     paddingVertical: 2,
   },
   currentScores: {
@@ -70,7 +71,7 @@ const styles = StyleSheet.create({
     width: "50%",
     padding: 2,
     borderWidth: 1,
-    borderColor: "blue",
+    borderColor: Colors.blue600,
   },
   score: {
     textAlign: "right",

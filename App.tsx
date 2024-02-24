@@ -5,6 +5,7 @@ import ScoreTable from "./components/ScoreTable";
 import ScoreTableFooter from "./components/ScoreTableFooter";
 import Header from "./components/Header";
 import { PlayerEnum } from "./lib/game.model";
+import { Colors } from "./lib/Colors";
 
 export default function App() {
   return (
@@ -47,7 +48,7 @@ const styles = StyleSheet.create({
     paddingTop: 40,
     flex: 1,
     flexDirection: "column",
-    backgroundColor: "blue",
+    backgroundColor: Colors.blue600,
   },
   tableHeaders: {
     flexDirection: "row",
@@ -59,7 +60,7 @@ const styles = StyleSheet.create({
     width: "50%",
     padding: 2,
     borderWidth: 1,
-    borderColor: "blue",
+    borderColor: Colors.blue600,
     flexDirection: "column",
     justifyContent: "flex-end",
   },
@@ -72,6 +73,6 @@ const styles = StyleSheet.create({
   tableContentContainer: {
     width: "50%",
     borderWidth: 1,
-    borderColor: "blue",
+    borderColor: Colors.blue600,
   },
 });
