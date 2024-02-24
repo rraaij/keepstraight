@@ -1,5 +1,4 @@
-import { Platform, StyleSheet, View } from "react-native";
-import { StatusBar } from "expo-status-bar";
+import { StyleSheet, View } from "react-native";
 import { Colors } from "../lib/Colors";
 import { PlayerEnum } from "../lib/game.model";
 import Header from "../components/Header";
@@ -44,7 +43,6 @@ export default Game;
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: 40,
     flex: 1,
     flexDirection: "column",
     backgroundColor: Colors.blue600,

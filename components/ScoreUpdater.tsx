@@ -1,6 +1,9 @@
 import { StyleSheet, View, Text, Modal, Button, TextInput } from "react-native";
 import { useState } from "react";
 import { Colors } from "../lib/Colors";
+import PrimaryButton from "./ui/PrimaryButton";
+import Ionicons from "@expo/vector-icons/Ionicons";
+import { PlayerEnum } from "../lib/game.model";
 
 const ScoreUpdater = ({
   visible,
@@ -16,45 +19,62 @@ const ScoreUpdater = ({
   return (
     <Modal visible={visible} animationType={"slide"}>
       <View style={styles.container}>
+        <Text style={styles.label}>Balls left on table</Text>
         <View style={styles.controlsContainer}>
-          <Text style={{ textAlign: "center", fontWeight: "bold" }}>
-            Balls left on table
-          </Text>
-          <View style={styles.controls}>
-            <View style={styles.button}>
-              <Button title={"+"} />
-            </View>
+          <View
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+            }}
+          >
+            <PrimaryButton onPress={() => {}}>
+              <Ionicons name={"remove"} size={24} color={"white"} />
+            </PrimaryButton>
             <TextInput
-              textAlign={"center"}
-              style={styles.inputControl}
+              placeholder="100"
+              style={[
+                styles.inputControl,
+                { width: 80, textAlign: "center", marginHorizontal: 10 },
+              ]}
               inputMode={"numeric"}
-              keyboardType={"numeric"}
+              keyboardType="numeric"
             />
-            <View style={styles.button}>
-              <Button title={"-"} />
-            </View>
+            <PrimaryButton onPress={() => {}}>
+              <Ionicons name={"add"} size={24} color={"white"} />
+            </PrimaryButton>
           </View>
         </View>
 
+        <Text style={styles.label}>Did it end in a foul?</Text>
         <View style={styles.controlsContainer}>
-          <Text style={{ textAlign: "center", fontWeight: "bold" }}>
-            Did it end in a foul?
-          </Text>
-          <View style={styles.controls}>
-            <View style={[styles.button, endedInFoul && styles.selectedButton]}>
-              <Button title={"Yes"} onPress={() => setEndedInFoul(true)} />
-            </View>
-            <View
-              style={[styles.button, !endedInFoul && styles.selectedButton]}
+          <View
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+            }}
+          >
+            <PrimaryButton
+              toggled={endedInFoul}
+              onPress={() => setEndedInFoul(true)}
             >
-              <Button title={"No"} onPress={() => setEndedInFoul(false)} />
-            </View>
+              <Text>Yes</Text>
+            </PrimaryButton>
+            <PrimaryButton
+              toggled={!endedInFoul}
+              onPress={() => setEndedInFoul(false)}
+            >
+              <Text>No</Text>
+            </PrimaryButton>
           </View>
         </View>
 
         <View style={styles.buttons}>
-          <Button title={"Cancel"} onPress={onCancel} />
-          <Button title={"Okay"} onPress={onAddScore} />
+          <PrimaryButton onPress={onCancel}>
+            <Text style={{ fontSize: 20, fontWeight: "bold" }}>Cancel</Text>
+          </PrimaryButton>
+          <PrimaryButton onPress={onAddScore}>
+            <Text style={{ fontSize: 20, fontWeight: "bold" }}>Okay</Text>
+          </PrimaryButton>
         </View>
       </View>
     </Modal>
@@ -69,29 +89,27 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     padding: 16,
-    borderBottomColor: "#ccc",
-    backgroundColor: "#a0d2fa",
+    backgroundColor: Colors.blue600,
   },
   controlsContainer: {
     justifyContent: "space-between",
-    paddingBottom: 16,
+    paddingBottom: 30,
   },
+  label: { fontWeight: "bold", fontSize: 20, marginBottom: 10 },
   controls: {
     flexDirection: "row",
     justifyContent: "space-evenly",
   },
   inputControl: {
-    borderWidth: 1,
-    borderColor: Colors.blue600,
-    width: "30%",
-    padding: 16,
-    borderRadius: 6,
     backgroundColor: "white",
-    fontSize: 40,
+    padding: 10,
+    borderRadius: 5,
+    fontSize: 20,
+    width: 230,
   },
   button: {
     borderWidth: 1,
-    borderColor: Colors.blue600,
+    borderColor: Colors.blue900,
     width: "30%",
     paddingVertical: 16,
     borderRadius: 6,
@@ -99,15 +117,14 @@ const styles = StyleSheet.create({
     marginHorizontal: 8,
   },
   selectedButton: {
-    backgroundColor: Colors.blue600,
+    backgroundColor: Colors.blue900,
     color: "white",
   },
   buttons: {
     borderTopWidth: 1,
-    borderTopColor: Colors.blue600,
+    borderTopColor: "white",
     paddingTop: 16,
     paddingHorizontal: 3,
     flexDirection: "row",
-    justifyContent: "space-between",
   },
 });

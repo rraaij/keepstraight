@@ -23,14 +23,13 @@ export default ScoreTableHeader;
 const styles = StyleSheet.create({
   container: {
     flexGrow: 1,
-    paddingHorizontal: 2,
     paddingTop: 2,
   },
   player: {
     textAlign: "center",
-    fontSize: 12,
+    fontSize: 20,
     fontWeight: "bold",
-    padding: 2,
+    paddingVertical: 2,
   },
   selected: { backgroundColor: "yellow" },
   unselected: { backgroundColor: "white" },

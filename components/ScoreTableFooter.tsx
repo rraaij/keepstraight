@@ -2,6 +2,7 @@ import { View, Text, StyleSheet, Button } from "react-native";
 import { useState } from "react";
 import ScoreUpdater from "./ScoreUpdater";
 import { Colors } from "../lib/Colors";
+import PrimaryButton from "./ui/PrimaryButton";
 
 const ScoreTableFooter = () => {
   const [scoreUpdaterVisible, setScoreUpdaterVisible] =
@@ -33,13 +34,16 @@ const ScoreTableFooter = () => {
 
       <View style={styles.actions}>
         <View style={styles.actionColumn}>
-          <Button title={"Rerack"} onPress={() => console.log("RERACK")} />
+          <PrimaryButton onPress={() => console.log("RERACK")}>
+            <Text style={{ fontSize: 20, fontWeight: "bold" }}>Rerack</Text>
+          </PrimaryButton>
         </View>
         <View style={styles.actionColumn}>
-          <Button
-            title={"Update Score"}
-            onPress={() => setScoreUpdaterVisible(true)}
-          />
+          <PrimaryButton onPress={() => setScoreUpdaterVisible(true)}>
+            <Text style={{ fontSize: 20, fontWeight: "bold" }}>
+              Update Score
+            </Text>
+          </PrimaryButton>
         </View>
         {scoreUpdaterVisible && (
           <ScoreUpdater
@@ -77,13 +81,12 @@ const styles = StyleSheet.create({
     textAlign: "right",
     paddingRight: 3,
     fontWeight: "bold",
-    fontSize: 12,
+    fontSize: 30,
   },
   possibleRun: {
     textAlign: "center",
-    paddingLeft: 2,
     fontWeight: "bold",
-    fontSize: 12,
+    fontSize: 20,
   },
   actions: {
     flexDirection: "row",
@@ -91,6 +94,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "stretch",
     flexGrow: 1,
+    marginBottom: 40,
   },
   actionColumn: {
     width: "50%",

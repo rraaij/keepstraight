@@ -1,14 +1,11 @@
-import { View, StyleSheet, Text } from "react-native";
+import { StyleSheet, Text } from "react-native";
 
 const Header = () => {
   return (
-    <View style={styles.header}>
-      <Text>To Setup</Text>
-      <View>
-        <Text>Target score: 50</Text>
-        <Text>Starting player: PLAYER_ONE</Text>
-      </View>
-    </View>
+    <>
+      <Text style={styles.header}>Target score</Text>
+      <Text style={[styles.header, styles.value]}>50</Text>
+    </>
   );
 };
 
@@ -16,9 +13,11 @@ export default Header;
 
 const styles = StyleSheet.create({
   header: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    paddingHorizontal: 3,
-    paddingVertical: 20,
+    textAlign: "center",
+    fontSize: 18,
+  },
+  value: {
+    fontSize: 36,
+    fontWeight: "bold",
   },
 });
