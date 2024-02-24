@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Button, StyleSheet, Text, TextInput, View } from "react-native";
-import { PlayerEnum, SetupInfo } from "./lib/game.model";
-import { Colors } from "./lib/Colors";
+import { PlayerEnum, SetupInfo } from "../lib/game.model";
+import { Colors } from "../lib/Colors";
 
 const setupInfo: SetupInfo = {
   playerOne: "Shane",
@@ -10,7 +10,7 @@ const setupInfo: SetupInfo = {
   startingPlayer: PlayerEnum.PLAYER_TWO,
 };
 
-const Setup = () => {
+const Setup = ({ navigation }: { navigation: any }) => {
   const [playerOne, setPlayerOne] = useState(setupInfo.playerOne);
   const [playerTwo, setPlayerTwo] = useState(setupInfo.playerTwo);
   const [targetScore, setTargetScore] = useState<number>(setupInfo.targetScore);
@@ -96,7 +96,10 @@ const Setup = () => {
       <Text style={{ color: "red" }}>{errors}</Text>
 
       <View style={styles.controlsContainer}>
-        <Button title={"Start Game"} onPress={() => {}} />
+        <Button
+          title={"Start Game"}
+          onPress={() => navigation.navigate("Game")}
+        />
       </View>
     </View>
   );
