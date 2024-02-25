@@ -1,18 +1,24 @@
 import { View, Text, StyleSheet } from "react-native";
 import { PlayerEnum } from "../lib/game.model";
+import { useGameStore } from "../lib/game.store";
 
 const ScoreTableHeader = ({ player }: { player: PlayerEnum }) => {
+  const { setupInfo, playerAtTable } = useGameStore((state) => ({
+    setupInfo: state.setup,
+    playerAtTable: state.playerAtTable,
+  }));
+
   return (
     <View style={styles.container}>
       <Text
         style={[
           styles.player,
-          player === PlayerEnum.PLAYER_ONE
-            ? styles.selected
-            : styles.unselected,
+          player === playerAtTable ? styles.selected : styles.unselected,
         ]}
       >
-        {player === PlayerEnum.PLAYER_ONE ? "Player One" : "Player Two"}
+        {player === PlayerEnum.PLAYER_ONE
+          ? setupInfo.playerOne
+          : setupInfo.playerTwo}
       </Text>
     </View>
   );

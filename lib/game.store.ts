@@ -7,10 +7,8 @@ type Game = {
   scoreTable: ScoreTable;
   playerAtTable: PlayerEnum;
   possibleRun: number;
-  isUpdateScoreVisible: boolean;
   startGame: (setupInfo: SetupInfo) => void;
   rerack: () => void;
-  showUpdateScore: (show: boolean) => void;
   updateScore: (scoreUpdateInfo: ScoreUpdateInfo) => void;
 };
 
@@ -24,7 +22,6 @@ export const useGameStore = create<Game>((set) => ({
   scoreTable: new ScoreTable([]),
   playerAtTable: PlayerEnum.PLAYER_ONE,
   possibleRun: 14,
-  isUpdateScoreVisible: false,
 
   startGame: (setupInfo: SetupInfo) => {
     set({ setup: setupInfo, playerAtTable: setupInfo.startingPlayer });
@@ -32,10 +29,6 @@ export const useGameStore = create<Game>((set) => ({
 
   rerack: () => {
     set((state) => ({ possibleRun: state.possibleRun + 14 }));
-  },
-
-  showUpdateScore: (show: boolean) => {
-    set({ isUpdateScoreVisible: show });
   },
 
   updateScore: (scoreUpdateInfo: ScoreUpdateInfo) => {

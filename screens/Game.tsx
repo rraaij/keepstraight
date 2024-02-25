@@ -11,7 +11,6 @@ const Game = () => {
     <View style={styles.container}>
       <Header />
 
-      {/*TABLE HEADERS*/}
       <View style={styles.tableHeaders}>
         <View style={styles.tableHeaderContainer}>
           <ScoreTableHeader player={PlayerEnum.PLAYER_ONE} />
@@ -21,7 +20,6 @@ const Game = () => {
         </View>
       </View>
 
-      {/*TABLE CONTENTS*/}
       <View style={styles.tableContents}>
         <View style={styles.tableContentContainer}>
           <ScoreTable player={PlayerEnum.PLAYER_ONE} />
@@ -31,7 +29,6 @@ const Game = () => {
         </View>
       </View>
 
-      {/*TABLE FOOTER*/}
       <View style={{ marginTop: "auto" }}>
         <ScoreTableFooter />
       </View>

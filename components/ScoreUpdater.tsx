@@ -1,9 +1,8 @@
-import { StyleSheet, View, Text, Modal, Button, TextInput } from "react-native";
+import { StyleSheet, View, Text, Modal, TextInput } from "react-native";
 import { useState } from "react";
 import { Colors } from "../lib/Colors";
 import PrimaryButton from "./ui/PrimaryButton";
 import Ionicons from "@expo/vector-icons/Ionicons";
-import { PlayerEnum } from "../lib/game.model";
 
 const ScoreUpdater = ({
   visible,
@@ -11,9 +10,10 @@ const ScoreUpdater = ({
   onCancel,
 }: {
   visible: boolean;
-  onAddScore: () => void;
+  onAddScore: (ballsOnTable: number, endedInFoul: boolean) => void;
   onCancel: () => void;
 }) => {
+  const [ballsOnTable, setBallsOnTable] = useState<number>(2);
   const [endedInFoul, setEndedInFoul] = useState<boolean>(false);
 
   return (
@@ -27,7 +27,7 @@ const ScoreUpdater = ({
               alignItems: "center",
             }}
           >
-            <PrimaryButton onPress={() => {}}>
+            <PrimaryButton onPress={() => setBallsOnTable(ballsOnTable - 1)}>
               <Ionicons name={"remove"} size={24} color={"white"} />
             </PrimaryButton>
             <TextInput
@@ -38,8 +38,13 @@ const ScoreUpdater = ({
               ]}
               inputMode={"numeric"}
               keyboardType="numeric"
+              value={ballsOnTable.toString()}
+              // TODO: implement min/max validation
+              // onChangeText={}
+              // min={2}
+              // max={possibleRun < 15 ? possibleRun : 15}
             />
-            <PrimaryButton onPress={() => {}}>
+            <PrimaryButton onPress={() => setBallsOnTable(ballsOnTable + 1)}>
               <Ionicons name={"add"} size={24} color={"white"} />
             </PrimaryButton>
           </View>
@@ -72,7 +77,7 @@ const ScoreUpdater = ({
           <PrimaryButton onPress={onCancel}>
             <Text style={{ fontSize: 20, fontWeight: "bold" }}>Cancel</Text>
           </PrimaryButton>
-          <PrimaryButton onPress={onAddScore}>
+          <PrimaryButton onPress={() => onAddScore(ballsOnTable, endedInFoul)}>
             <Text style={{ fontSize: 20, fontWeight: "bold" }}>Okay</Text>
           </PrimaryButton>
         </View>

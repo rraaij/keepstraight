@@ -1,15 +1,25 @@
-import { View, Text, StyleSheet, Button } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 import { useState } from "react";
 import ScoreUpdater from "./ScoreUpdater";
 import { Colors } from "../lib/Colors";
 import PrimaryButton from "./ui/PrimaryButton";
+import { useGameStore } from "../lib/game.store";
+import { PlayerEnum } from "../lib/game.model";
 
 const ScoreTableFooter = () => {
+  const { possibleRun, rerack, scoreTable, updateScore } = useGameStore(
+    (state) => ({
+      possibleRun: state.possibleRun,
+      rerack: state.rerack,
+      scoreTable: state.scoreTable,
+      updateScore: state.updateScore,
+    }),
+  );
   const [scoreUpdaterVisible, setScoreUpdaterVisible] =
     useState<boolean>(false);
 
-  const addScoreHandler = () => {
-    // handle updated score
+  const addScoreHandler = (ballsOnTable: number, endedInFoul: boolean) => {
+    updateScore({ ballsOnTable, endedInFoul });
     setScoreUpdaterVisible(false);
   };
 
@@ -18,23 +28,21 @@ const ScoreTableFooter = () => {
       <View style={styles.currentScores}>
         <View style={styles.column}>
           <Text style={styles.score}>
-            {/*getCurrentScore*/}
-            34
+            {scoreTable.getCurrentScore(PlayerEnum.PLAYER_ONE)}
           </Text>
         </View>
         <View style={styles.column}>
           <Text style={styles.score}>
-            {/*getCurrentScore*/}
-            67
+            {scoreTable.getCurrentScore(PlayerEnum.PLAYER_TWO)}
           </Text>
         </View>
       </View>
 
-      <Text style={styles.possibleRun}>Possible Run: 90</Text>
+      <Text style={styles.possibleRun}>Possible Run: {possibleRun}</Text>
 
       <View style={styles.actions}>
         <View style={styles.actionColumn}>
-          <PrimaryButton onPress={() => console.log("RERACK")}>
+          <PrimaryButton onPress={() => rerack()}>
             <Text style={{ fontSize: 20, fontWeight: "bold" }}>Rerack</Text>
           </PrimaryButton>
         </View>

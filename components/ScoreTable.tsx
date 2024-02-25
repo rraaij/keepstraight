@@ -1,10 +1,12 @@
 import { FlatList, StyleSheet, View, Text } from "react-native";
 import { PlayerEnum, Score } from "../lib/game.model";
 import { Colors } from "../lib/Colors";
-import { SCORES } from "@assets/SCORES";
+import { useGameStore } from "../lib/game.store";
 
 const ScoreTable = ({ player }: { player: PlayerEnum }) => {
-  const scores = SCORES.filter((score) => score.player === player);
+  const { scores } = useGameStore((state) => ({
+    scores: state.scoreTable.getScoresForPlayer(player),
+  }));
 
   const renderScore = ({ item }: { item: Score }) => {
     return (

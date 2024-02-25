@@ -1,25 +1,24 @@
 import { useState } from "react";
-import { Button, StyleSheet, Text, TextInput, View } from "react-native";
+import { StyleSheet, Text, TextInput, View } from "react-native";
 import Ionicons from "@expo/vector-icons/Ionicons";
-import { PlayerEnum, SetupInfo } from "../lib/game.model";
+import { PlayerEnum } from "../lib/game.model";
 import { Colors } from "../lib/Colors";
 import PrimaryButton from "../components/ui/PrimaryButton";
-import { bold } from "colorette";
-
-const setupInfo: SetupInfo = {
-  playerOne: "Shane",
-  playerTwo: "Earl",
-  targetScore: 125,
-  startingPlayer: PlayerEnum.PLAYER_TWO,
-};
+import { useGameStore } from "../lib/game.store";
 
 const Setup = ({ navigation }: { navigation: any }) => {
+  const { setupInfo, startGame } = useGameStore((state) => ({
+    setupInfo: state.setup,
+    startGame: state.startGame,
+  }));
+
   const [playerOne, setPlayerOne] = useState(setupInfo.playerOne);
   const [playerTwo, setPlayerTwo] = useState(setupInfo.playerTwo);
   const [targetScore, setTargetScore] = useState<number>(setupInfo.targetScore);
   const [startingPlayer, setStartingPlayer] = useState<PlayerEnum>(
     setupInfo.startingPlayer,
   );
+  // TODO add validation
   const [errors, setErrors] = useState("");
 
   return (
@@ -53,7 +52,7 @@ const Setup = ({ navigation }: { navigation: any }) => {
             alignItems: "center",
           }}
         >
-          <PrimaryButton onPress={() => {}}>
+          <PrimaryButton onPress={() => setTargetScore(targetScore - 5)}>
             <Ionicons name={"remove"} size={24} color={"white"} />
           </PrimaryButton>
           <TextInput
@@ -66,7 +65,7 @@ const Setup = ({ navigation }: { navigation: any }) => {
             inputMode={"numeric"}
             keyboardType="numeric"
           />
-          <PrimaryButton onPress={() => {}}>
+          <PrimaryButton onPress={() => setTargetScore(targetScore + 5)}>
             <Ionicons name={"add"} size={24} color={"white"} />
           </PrimaryButton>
         </View>
@@ -98,7 +97,17 @@ const Setup = ({ navigation }: { navigation: any }) => {
       <Text style={{ color: "red" }}>{errors}</Text>
 
       <View style={{ alignItems: "center", width: "100%" }}>
-        <PrimaryButton onPress={() => navigation.navigate("Game")}>
+        <PrimaryButton
+          onPress={() => {
+            startGame({
+              playerOne,
+              playerTwo,
+              targetScore,
+              startingPlayer,
+            });
+            navigation.navigate("Game");
+          }}
+        >
           <Text style={{ fontSize: 20, fontWeight: "bold" }}>Start Game</Text>
         </PrimaryButton>
       </View>
