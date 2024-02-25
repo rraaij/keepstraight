@@ -52,7 +52,8 @@ const styles = StyleSheet.create({
   },
   tableHeaderContainer: {
     width: "50%",
-    padding: 2,
+    paddingVertical: 2,
+    paddingHorizontal: 1,
     borderWidth: 1,
     borderColor: Colors.blue600,
     flexDirection: "column",
@@ -68,5 +69,6 @@ const styles = StyleSheet.create({
     width: "50%",
     borderWidth: 1,
     borderColor: Colors.blue600,
+    backgroundColor: Colors.blue600,
   },
 });

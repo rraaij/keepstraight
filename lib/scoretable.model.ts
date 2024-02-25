@@ -7,10 +7,9 @@ export class ScoreTable {
     const playerScores = this.scores.filter((s) => s.player === player);
     playerScores.forEach((score) => {
       if (score.inning === 1) {
-        score.total = score.score;
+        score.total = score.run;
       } else {
-        score.total =
-          (playerScores[score.inning - 2]?.total ?? 0) + score.score;
+        score.total = (playerScores[score.inning - 2]?.total ?? 0) + score.run;
       }
     });
     return playerScores;
@@ -25,7 +24,7 @@ export class ScoreTable {
     this.scores.push({
       player,
       inning: lastInning + 1,
-      score: possibleRun - scoreInfo.ballsOnTable,
+      run: possibleRun - scoreInfo.ballsOnTable,
       foul: scoreInfo.endedInFoul,
     });
     return this;

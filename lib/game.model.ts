@@ -18,7 +18,7 @@ export type ScoreUpdateInfo = {
 export type Score = {
   player: PlayerEnum;
   inning: number;
-  score: number;
+  run: number;
   foul: boolean;
   total?: number;
 };

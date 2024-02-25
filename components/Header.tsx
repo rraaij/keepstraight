@@ -1,4 +1,4 @@
-import { StyleSheet, Text } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import { SetupInfo } from "../lib/game.model";
 import { useGameStore } from "../lib/game.store";
 
@@ -7,10 +7,10 @@ const Header = () => {
     setupInfo: state.setup,
   }));
   return (
-    <>
+    <View>
       <Text style={styles.header}>Target score</Text>
-      <Text style={[styles.header, styles.value]}>{setupInfo.targetScore}</Text>
-    </>
+      <Text style={styles.value}>{setupInfo.targetScore}</Text>
+    </View>
   );
 };
 
@@ -22,6 +22,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
   },
   value: {
+    textAlign: "center",
     fontSize: 36,
     fontWeight: "bold",
   },

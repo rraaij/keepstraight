@@ -1,27 +1,17 @@
 import { View, Text, StyleSheet } from "react-native";
-import { useState } from "react";
-import ScoreUpdater from "./ScoreUpdater";
 import { Colors } from "../lib/Colors";
 import PrimaryButton from "./ui/PrimaryButton";
 import { useGameStore } from "../lib/game.store";
 import { PlayerEnum } from "../lib/game.model";
+import { useNavigation } from "@react-navigation/native";
 
 const ScoreTableFooter = () => {
-  const { possibleRun, rerack, scoreTable, updateScore } = useGameStore(
-    (state) => ({
-      possibleRun: state.possibleRun,
-      rerack: state.rerack,
-      scoreTable: state.scoreTable,
-      updateScore: state.updateScore,
-    }),
-  );
-  const [scoreUpdaterVisible, setScoreUpdaterVisible] =
-    useState<boolean>(false);
-
-  const addScoreHandler = (ballsOnTable: number, endedInFoul: boolean) => {
-    updateScore({ ballsOnTable, endedInFoul });
-    setScoreUpdaterVisible(false);
-  };
+  const navigation = useNavigation();
+  const { possibleRun, rerack, scoreTable } = useGameStore((state) => ({
+    possibleRun: state.possibleRun,
+    rerack: state.rerack,
+    scoreTable: state.scoreTable,
+  }));
 
   return (
     <View style={styles.container}>
@@ -37,9 +27,7 @@ const ScoreTableFooter = () => {
           </Text>
         </View>
       </View>
-
       <Text style={styles.possibleRun}>Possible Run: {possibleRun}</Text>
-
       <View style={styles.actions}>
         <View style={styles.actionColumn}>
           <PrimaryButton onPress={() => rerack()}>
@@ -47,19 +35,13 @@ const ScoreTableFooter = () => {
           </PrimaryButton>
         </View>
         <View style={styles.actionColumn}>
-          <PrimaryButton onPress={() => setScoreUpdaterVisible(true)}>
+          {/*// @ts-ignore*/}
+          <PrimaryButton onPress={() => navigation.navigate("ScoreUpdate")}>
             <Text style={{ fontSize: 20, fontWeight: "bold" }}>
               Update Score
             </Text>
           </PrimaryButton>
         </View>
-        {scoreUpdaterVisible && (
-          <ScoreUpdater
-            visible={scoreUpdaterVisible}
-            onAddScore={addScoreHandler}
-            onCancel={() => setScoreUpdaterVisible(false)}
-          />
-        )}
       </View>
     </View>
   );

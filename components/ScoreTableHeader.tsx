@@ -36,6 +36,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: "bold",
     paddingVertical: 2,
+    borderRadius: 4,
   },
   selected: { backgroundColor: "yellow" },
   unselected: { backgroundColor: "white" },

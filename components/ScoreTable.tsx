@@ -14,9 +14,13 @@ const ScoreTable = ({ player }: { player: PlayerEnum }) => {
         <Text style={[styles.datafield, { textAlign: "left" }]}>
           {item.inning}
         </Text>
-        <Text style={styles.datafield}>{item.score}</Text>
+        <Text style={styles.datafield}>{item.run}</Text>
         <Text style={[styles.datafield, { textAlign: "center" }]}>
-          {item.foul && <Text style={styles.foul}> F </Text>}
+          {item.foul && (
+            <View style={styles.foul}>
+              <Text style={styles.foulText}>F</Text>
+            </View>
+          )}
         </Text>
         <Text style={styles.datafield}>{item.total}</Text>
       </View>
@@ -43,7 +47,11 @@ const ScoreTable = ({ player }: { player: PlayerEnum }) => {
         <Text style={[styles.datafield, { fontWeight: "bold" }]}>T</Text>
       </View>
 
-      <FlatList data={scores} renderItem={renderScore} />
+      <FlatList
+        data={scores}
+        renderItem={renderScore}
+        keyExtractor={(item) => item.inning.toString()}
+      />
     </View>
   );
 };
@@ -58,6 +66,8 @@ const styles = StyleSheet.create({
     borderColor: Colors.blue600,
     width: "100%",
     backgroundColor: "white",
+    borderRadius: 4,
+    overflow: "hidden",
   },
   scoreContainer: {
     flexDirection: "row",
@@ -73,6 +83,10 @@ const styles = StyleSheet.create({
   },
   foul: {
     backgroundColor: "red",
+    paddingHorizontal: 3,
+    borderRadius: 3,
+  },
+  foulText: {
     color: "white",
     fontWeight: "bold",
     fontSize: 12,
