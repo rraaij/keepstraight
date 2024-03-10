@@ -18,12 +18,13 @@ export default Header;
 
 const styles = StyleSheet.create({
   header: {
+    fontFamily: "ArimoBold",
     textAlign: "center",
-    fontSize: 18,
+    fontSize: 16,
   },
   value: {
+    fontFamily: "LondonHeavy",
     textAlign: "center",
-    fontSize: 36,
-    fontWeight: "bold",
+    fontSize: 50,
   },
 });

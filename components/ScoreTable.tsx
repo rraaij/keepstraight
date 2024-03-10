@@ -11,16 +11,18 @@ const ScoreTable = ({ player }: { player: PlayerEnum }) => {
   const renderScore = ({ item }: { item: Score }) => {
     return (
       <View style={styles.scoreContainer}>
-        <Text style={[styles.datafield, { textAlign: "left" }]}>
+        <Text style={[styles.datafield, { textAlign: "left", width: "15%" }]}>
           {item.inning}
         </Text>
-        <Text style={styles.datafield}>{item.run}</Text>
-        <Text style={[styles.datafield, { textAlign: "center" }]}>
-          {item.foul && (
-            <View style={styles.foul}>
-              <Text style={styles.foulText}>F</Text>
-            </View>
-          )}
+        <Text style={[styles.datafield, { marginRight: 20 }]}>{item.run}</Text>
+        <Text
+          style={[
+            styles.datafield,
+            styles.foul,
+            !item.foul && { backgroundColor: "white" }, // need this to line up the columns if no foul
+          ]}
+        >
+          F
         </Text>
         <Text style={styles.datafield}>{item.total}</Text>
       </View>
@@ -29,17 +31,29 @@ const ScoreTable = ({ player }: { player: PlayerEnum }) => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.scoreContainer}>
-        <Text
-          style={[styles.datafield, { fontWeight: "bold", textAlign: "left" }]}
-        >
-          #
-        </Text>
-        <Text style={[styles.datafield, { fontWeight: "bold" }]}>S</Text>
+      <View
+        style={[
+          styles.scoreContainer,
+          { borderBottomWidth: 1, borderBottomColor: "lightgray" },
+        ]}
+      >
         <Text
           style={[
             styles.datafield,
-            { fontWeight: "bold", textAlign: "center" },
+            { fontWeight: "bold", textAlign: "left", width: "15%" },
+          ]}
+        >
+          #
+        </Text>
+        <Text
+          style={[styles.datafield, { fontWeight: "bold", marginRight: 20 }]}
+        >
+          R
+        </Text>
+        <Text
+          style={[
+            styles.datafield,
+            { fontWeight: "bold", textAlign: "center", width: "15%" },
           ]}
         >
           F
@@ -77,18 +91,15 @@ const styles = StyleSheet.create({
     paddingHorizontal: 8,
   },
   datafield: {
-    width: "25%",
+    fontFamily: "ArimoBold",
+    width: "35%",
     textAlign: "right",
     fontSize: 18,
   },
   foul: {
+    width: "15%",
+    textAlign: "center",
     backgroundColor: "red",
-    paddingHorizontal: 3,
-    borderRadius: 3,
-  },
-  foulText: {
     color: "white",
-    fontWeight: "bold",
-    fontSize: 12,
   },
 });

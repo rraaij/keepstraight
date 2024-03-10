@@ -4,8 +4,9 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 import { Colors } from "../lib/Colors";
 import PrimaryButton from "../components/ui/PrimaryButton";
 import { useGameStore } from "../lib/game.store";
+import { NavigationProp } from "@react-navigation/core";
 
-const ScoreUpdate = ({ navigation }: { navigation: any }) => {
+const ScoreUpdate = ({ navigation }: { navigation: NavigationProp<any> }) => {
   const { updateScore, possibleRun } = useGameStore((state) => ({
     updateScore: state.updateScore,
     possibleRun: state.possibleRun,
@@ -106,30 +107,23 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     paddingBottom: 30,
   },
-  label: { fontWeight: "bold", fontSize: 20, marginBottom: 10 },
+  label: {
+    fontFamily: "ArimoBold",
+    fontWeight: "bold",
+    fontSize: 20,
+    marginBottom: 10,
+  },
   controls: {
     flexDirection: "row",
     justifyContent: "space-evenly",
   },
   inputControl: {
+    fontFamily: "ArimoBold",
     backgroundColor: "white",
     padding: 10,
     borderRadius: 5,
     fontSize: 20,
     width: 230,
-  },
-  button: {
-    borderWidth: 1,
-    borderColor: Colors.blue900,
-    width: "30%",
-    paddingVertical: 16,
-    borderRadius: 6,
-    fontWeight: "bold",
-    marginHorizontal: 8,
-  },
-  selectedButton: {
-    backgroundColor: Colors.blue900,
-    color: "white",
   },
   buttons: {
     borderTopWidth: 1,

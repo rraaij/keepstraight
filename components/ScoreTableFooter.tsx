@@ -68,12 +68,14 @@ const styles = StyleSheet.create({
     borderColor: Colors.blue600,
   },
   score: {
+    fontFamily: "LondonHeavy",
     textAlign: "right",
     paddingRight: 3,
     fontWeight: "bold",
-    fontSize: 30,
+    fontSize: 40,
   },
   possibleRun: {
+    fontFamily: "ArimoBold",
     textAlign: "center",
     fontWeight: "bold",
     fontSize: 20,

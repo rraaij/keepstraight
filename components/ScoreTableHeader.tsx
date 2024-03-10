@@ -32,11 +32,12 @@ const styles = StyleSheet.create({
     paddingTop: 2,
   },
   player: {
+    fontFamily: "ArimoBold",
     textAlign: "center",
     fontSize: 20,
     fontWeight: "bold",
     paddingVertical: 2,
-    borderRadius: 4,
+    borderRadius: 14,
   },
   selected: { backgroundColor: "yellow" },
   unselected: { backgroundColor: "white" },

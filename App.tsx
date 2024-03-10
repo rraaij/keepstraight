@@ -1,15 +1,40 @@
-import { StatusBar } from "expo-status-bar";
+import { useEffect } from "react";
 import { Platform } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { StatusBar } from "expo-status-bar";
+import { useFonts } from "expo-font";
+import * as SplashScreen from "expo-splash-screen";
+import { Colors } from "./lib/Colors";
 import Setup from "./screens/Setup";
 import Game from "./screens/Game";
-import { Colors } from "./lib/Colors";
 import ScoreUpdate from "./screens/ScoreUpdate";
+
+// Prevent the splash screen from auto-hiding before asset loading is complete.
+SplashScreen.preventAutoHideAsync();
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
+  const [loaded, error] = useFonts({
+    LondonHeavy: require("./assets/font/London-Underground-Heavy.ttf"),
+    ArimoBold: require("./assets/font/Arimo-bold.ttf"),
+  });
+  // Expo Router uses Error Boundaries to catch errors in the navigation tree.
+  useEffect(() => {
+    if (error) throw error;
+  }, [error]);
+
+  useEffect(() => {
+    if (loaded) {
+      SplashScreen.hideAsync();
+    }
+  }, [loaded]);
+
+  if (!loaded) {
+    return null;
+  }
+
   return (
     <>
       <StatusBar style={Platform.OS === "ios" ? "light" : "auto"} />

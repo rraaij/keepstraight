@@ -3,10 +3,11 @@ import { StyleSheet, Text, TextInput, View } from "react-native";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { PlayerEnum } from "../lib/game.model";
 import { Colors } from "../lib/Colors";
-import PrimaryButton from "../components/ui/PrimaryButton";
 import { useGameStore } from "../lib/game.store";
+import PrimaryButton from "../components/ui/PrimaryButton";
+import { NavigationProp } from "@react-navigation/core";
 
-const Setup = ({ navigation }: { navigation: any }) => {
+const Setup = ({ navigation }: { navigation: NavigationProp<any> }) => {
   const { setupInfo, startGame } = useGameStore((state) => ({
     setupInfo: state.setup,
     startGame: state.startGame,
@@ -23,6 +24,9 @@ const Setup = ({ navigation }: { navigation: any }) => {
 
   return (
     <View style={styles.container}>
+      <View style={styles.titleContainer}>
+        <Text style={styles.title}>KEEPSTRAIGHT</Text>
+      </View>
       <View style={styles.controlsContainer}>
         <Text style={styles.label}>Player One</Text>
         <TextInput
@@ -124,6 +128,15 @@ const styles = StyleSheet.create({
     alignItems: "flex-start",
     padding: 10,
   },
+  titleContainer: {
+    width: "100%",
+    alignItems: "center",
+    paddingBottom: 20,
+  },
+  title: {
+    fontSize: 50,
+    fontFamily: "LondonHeavy",
+  },
   controlsContainer: {
     width: "100%",
     flexDirection: "row",
@@ -132,12 +145,14 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   label: {
+    fontFamily: "ArimoBold",
     color: Colors.blue900,
     fontSize: 20,
     fontWeight: "bold",
     paddingHorizontal: 12,
   },
   input: {
+    fontFamily: "ArimoBold",
     backgroundColor: "white",
     padding: 10,
     borderRadius: 5,

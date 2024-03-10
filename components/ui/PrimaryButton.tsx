@@ -1,3 +1,4 @@
+import { ReactNode } from "react";
 import { View, Text, Pressable, StyleSheet } from "react-native";
 import { Colors } from "../../lib/Colors";
 
@@ -6,7 +7,7 @@ const PrimaryButton = ({
   onPress,
   toggled = false,
 }: {
-  children: any;
+  children: ReactNode;
   onPress: () => void;
   toggled?: boolean;
 }) => {
@@ -48,6 +49,7 @@ const styles = StyleSheet.create({
     elevation: 2,
   },
   buttonText: {
+    fontFamily: "ArimoBold",
     color: "white",
     textAlign: "center",
   },
